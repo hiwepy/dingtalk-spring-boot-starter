@@ -46,10 +46,10 @@ import com.dingtalk.api.response.OapiSnsGetuserinfoResponse;
 import com.dingtalk.api.response.OapiUserGetResponse;
 import com.dingtalk.api.response.OapiUserGetUseridByUnionidResponse;
 import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
-import com.dingtalk.spring.boot.property.SecurityDingTalkCropAppProperties;
-import com.dingtalk.spring.boot.property.SecurityDingTalkLoginProperties;
-import com.dingtalk.spring.boot.property.SecurityDingTalkPersonalMiniAppProperties;
-import com.dingtalk.spring.boot.property.SecurityDingTalkSuiteProperties;
+import com.dingtalk.spring.boot.property.DingTalkCropAppProperties;
+import com.dingtalk.spring.boot.property.DingTalkLoginProperties;
+import com.dingtalk.spring.boot.property.DingTalkPersonalMiniAppProperties;
+import com.dingtalk.spring.boot.property.DingTalkSuiteProperties;
 import com.google.common.base.Optional;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -79,22 +79,22 @@ public class DingTalkTemplate implements InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		
 		if(!CollectionUtils.isEmpty(this.dingtalkProperties.getCropApps())) {
-			for (SecurityDingTalkCropAppProperties properties : this.dingtalkProperties.getCropApps()) {
+			for (DingTalkCropAppProperties properties : this.dingtalkProperties.getCropApps()) {
 				appKeySecret.put(properties.getAppKey(), properties.getAppSecret());
 			}
 		}
 		if(!CollectionUtils.isEmpty(this.dingtalkProperties.getApps())) {
-			for (SecurityDingTalkPersonalMiniAppProperties properties : this.dingtalkProperties.getApps()) {
+			for (DingTalkPersonalMiniAppProperties properties : this.dingtalkProperties.getApps()) {
 				appKeySecret.put(properties.getAppId(), properties.getAppSecret());
 			}
 		}
 		if(!CollectionUtils.isEmpty(this.dingtalkProperties.getSuites())) {
-			for (SecurityDingTalkSuiteProperties properties : this.dingtalkProperties.getSuites()) {
+			for (DingTalkSuiteProperties properties : this.dingtalkProperties.getSuites()) {
 				appKeySecret.put(properties.getAppId(), properties.getSuiteSecret());
 			}
 		}
 		if(!CollectionUtils.isEmpty(this.dingtalkProperties.getLogins())) {
-			for (SecurityDingTalkLoginProperties properties : this.dingtalkProperties.getLogins()) {
+			for (DingTalkLoginProperties properties : this.dingtalkProperties.getLogins()) {
 				appKeySecret.put(properties.getAppId(), properties.getAppSecret());
 			}
 		}

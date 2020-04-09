@@ -11,7 +11,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class SecurityDingTalkLoginProperties {
+public class DingTalkLoginProperties {
 
 	/**
 	 * 	移动接入应用-扫码登录应用的appId

@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import com.dingtalk.spring.boot.property.SecurityDingTalkCropAppProperties;
-import com.dingtalk.spring.boot.property.SecurityDingTalkLoginProperties;
-import com.dingtalk.spring.boot.property.SecurityDingTalkPersonalMiniAppProperties;
-import com.dingtalk.spring.boot.property.SecurityDingTalkSuiteProperties;
+import com.dingtalk.spring.boot.property.DingTalkCropAppProperties;
+import com.dingtalk.spring.boot.property.DingTalkLoginProperties;
+import com.dingtalk.spring.boot.property.DingTalkPersonalMiniAppProperties;
+import com.dingtalk.spring.boot.property.DingTalkSuiteProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,18 +29,18 @@ public class DingTalkProperties {
 	/**
 	 *    企业内部开发：小程序、H5配置
 	 */
-	private List<SecurityDingTalkCropAppProperties> cropApps;
+	private List<DingTalkCropAppProperties> cropApps;
 	/**
 	 *    第三方个人应用：小程序配置
 	 */
-	private List<SecurityDingTalkPersonalMiniAppProperties> apps;
+	private List<DingTalkPersonalMiniAppProperties> apps;
 	/**
 	 * 	第三方企业应用：小程序、H5配置
 	 */
-	private List<SecurityDingTalkSuiteProperties> suites;
+	private List<DingTalkSuiteProperties> suites;
 	/**
 	 *	 移动接入应用：扫码登录配置
 	 */
-	private List<SecurityDingTalkLoginProperties> logins;
+	private List<DingTalkLoginProperties> logins;
 	
 }
