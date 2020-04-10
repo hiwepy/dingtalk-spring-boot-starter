@@ -27,6 +27,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiDepartmentGetRequest;
+import com.dingtalk.api.request.OapiGetJsapiTicketRequest;
 import com.dingtalk.api.request.OapiGettokenRequest;
 import com.dingtalk.api.request.OapiSnsGetPersistentCodeRequest;
 import com.dingtalk.api.request.OapiSnsGetSnsTokenRequest;
@@ -37,6 +38,7 @@ import com.dingtalk.api.request.OapiUserGetRequest;
 import com.dingtalk.api.request.OapiUserGetUseridByUnionidRequest;
 import com.dingtalk.api.request.OapiUserGetuserinfoRequest;
 import com.dingtalk.api.response.OapiDepartmentGetResponse;
+import com.dingtalk.api.response.OapiGetJsapiTicketResponse;
 import com.dingtalk.api.response.OapiGettokenResponse;
 import com.dingtalk.api.response.OapiSnsGetPersistentCodeResponse;
 import com.dingtalk.api.response.OapiSnsGetSnsTokenResponse;
@@ -46,10 +48,13 @@ import com.dingtalk.api.response.OapiSnsGetuserinfoResponse;
 import com.dingtalk.api.response.OapiUserGetResponse;
 import com.dingtalk.api.response.OapiUserGetUseridByUnionidResponse;
 import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
+import com.dingtalk.spring.boot.bean.JsapiTicketSignature;
 import com.dingtalk.spring.boot.property.DingTalkCropAppProperties;
 import com.dingtalk.spring.boot.property.DingTalkLoginProperties;
 import com.dingtalk.spring.boot.property.DingTalkPersonalMiniAppProperties;
 import com.dingtalk.spring.boot.property.DingTalkSuiteProperties;
+import com.dingtalk.spring.boot.utils.DingTalkUtils;
+import com.dingtalk.spring.boot.utils.RandomUtils;
 import com.google.common.base.Optional;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -210,15 +215,19 @@ public class DingTalkTemplate implements InitializingBean {
 	 * @return
 	 * @throws ExecutionException
 	 */
-	public String getAccessToken(String appKey, String appSecret) throws ExecutionException {
+	public String getAccessToken(String appKey, String appSecret) throws ApiException {
+		try {
+			
+			JSONObject key = new JSONObject();
+			key.put("appKey", appKey);
+			key.put("appSecret", appSecret);
 
-		JSONObject key = new JSONObject();
-		key.put("appKey", appKey);
-		key.put("appSecret", appSecret);
-
-		Optional<String> opt = ACCESS_TOKEN_CACHES.get(key.toJSONString());
-		return opt.isPresent() ? opt.get() : null;
-
+			Optional<String> opt = ACCESS_TOKEN_CACHES.get(key.toJSONString());
+			return opt.isPresent() ? opt.get() : null;
+			
+		} catch (ExecutionException e) {
+			throw new ApiException(e);
+		}
 	}
 	
 	/**
@@ -229,15 +238,18 @@ public class DingTalkTemplate implements InitializingBean {
 	 * @return
 	 * @throws ExecutionException
 	 */
-	public String getOpenToken(String appId, String appSecret) throws ExecutionException {
-
-		JSONObject key = new JSONObject();
-		key.put("appId", appId);
-		key.put("appSecret", appSecret);
-
-		Optional<String> opt = SNS_ACCESS_TOKEN_CACHES.get(key.toJSONString());
-		return opt.isPresent() ? opt.get() : null;
-
+	public String getOpenToken(String appId, String appSecret) throws ApiException {
+		try {
+			
+			JSONObject key = new JSONObject();
+			key.put("appId", appId);
+			key.put("appSecret", appSecret);
+	
+			Optional<String> opt = SNS_ACCESS_TOKEN_CACHES.get(key.toJSONString());
+			return opt.isPresent() ? opt.get() : null;
+		} catch (ExecutionException e) {
+			throw new ApiException(e);
+		}
 	}
 	
 	/**
@@ -286,16 +298,11 @@ public class DingTalkTemplate implements InitializingBean {
 	 * @param accessToken
 	 * @return
 	 */
-	public String get_persistent_code(String accessToken, String code) {
-		OapiSnsGetPersistentCodeResponse response = null;
-		try {
-			DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/get_persistent_code");
-			OapiSnsGetPersistentCodeRequest request = new OapiSnsGetPersistentCodeRequest();
-			request.setTmpAuthCode(code);
-			response = client.execute(request, accessToken);
-		} catch (ApiException e) {
-			e.printStackTrace();
-		}
+	public String getPersistentCode(String accessToken, String code) throws ApiException  {
+		DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/get_persistent_code");
+		OapiSnsGetPersistentCodeRequest request = new OapiSnsGetPersistentCodeRequest();
+		request.setTmpAuthCode(code);
+		OapiSnsGetPersistentCodeResponse response = client.execute(request, accessToken);
 		return response.getBody();
 	}
 
@@ -307,17 +314,12 @@ public class DingTalkTemplate implements InitializingBean {
 	 * @param accessToken    开放应用的token
 	 * @return
 	 */
-	public String get_sns_token(String openId, String persistentCode, String accessToken) {
-		OapiSnsGetSnsTokenResponse response = null;
-		try {
-			DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/get_sns_token");
-			OapiSnsGetSnsTokenRequest request = new OapiSnsGetSnsTokenRequest();
-			request.setOpenid(openId);
-			request.setPersistentCode(persistentCode);
-			response = client.execute(request, accessToken);
-		} catch (ApiException e) {
-			e.printStackTrace();
-		}
+	public String getSnsToken(String openId, String persistentCode, String accessToken) throws ApiException {
+		DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/get_sns_token");
+		OapiSnsGetSnsTokenRequest request = new OapiSnsGetSnsTokenRequest();
+		request.setOpenid(openId);
+		request.setPersistentCode(persistentCode);
+		OapiSnsGetSnsTokenResponse response = client.execute(request, accessToken);
 		return response.getSnsToken();
 	}
 
@@ -327,7 +329,7 @@ public class DingTalkTemplate implements InitializingBean {
 	 * @param snsToken
 	 * @return
 	 */
-	public String get_sns_userinfo_unionid(String snsToken) {
+	public String get_sns_userinfo_unionid(String snsToken) throws ApiException{
 		OapiSnsGetuserinfoResponse response = null;
 		try {
 			DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/getuserinfo");
@@ -371,5 +373,41 @@ public class DingTalkTemplate implements InitializingBean {
 		request.setHttpMethod(METHOD_GET);
 		return client.execute(request, accessToken);
 	}
+
+	
+	/**
+	   * 获得ticket,不强制刷新ticket.
+	   *
+	   * @see #getTicket(TicketType, boolean)
+	   */
+	  String getJsapiTicket(TicketType type, String accessToken) throws ApiException {
+		  DefaultDingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/get_jsapi_ticket");
+		  OapiGetJsapiTicketRequest req = new OapiGetJsapiTicketRequest();
+		  req.setTopHttpMethod("GET");
+		  OapiGetJsapiTicketResponse execute = client.execute(req, accessToken);
+		  return execute.getTicket();
+	  }
+	   
+	  
+	/**
+	 *	 创建调用jsapi时所需要的签名.
+	 * 	详情请见：https://ding-doc.dingtalk.com/doc#/dev/uwa7vs
+	 */
+	public JsapiTicketSignature createJsapiSignature(String url, String agentId, String accessToken) throws ApiException {
+		
+		long timestamp = System.currentTimeMillis() / 1000;
+	    String randomStr = RandomUtils.getRandomStr();
+	    String jsapiTicket = getJsapiTicket(TicketType.JSAPI, accessToken);
+	    String signature = DingTalkUtils.sign(jsapiTicket, randomStr, timestamp, url);
+	    JsapiTicketSignature jsapiSignature = new JsapiTicketSignature();
+	    jsapiSignature.setAgentId(agentId);
+	    jsapiSignature.setTimestamp(timestamp);
+	    jsapiSignature.setNonceStr(randomStr);
+	    jsapiSignature.setUrl(url);
+	    jsapiSignature.setSignature(signature);
+	    return jsapiSignature;
+		
+	}
+	
 
 }
