@@ -1,5 +1,5 @@
-# security-dingtalk-spring-boot-starter
-security dingtalk starter for spring boot
+# dingtalk-spring-boot-starter
+dingtalk starter for spring boot
 
 ### 说明
 
@@ -13,12 +13,7 @@ security dingtalk starter for spring boot
 ``` xml
 <dependency>
 	<groupId>${project.groupId}</groupId>
-	<artifactId>security-dingtalk-spring-boot-starter</artifactId>
+	<artifactId>dingtalk-spring-boot-starter</artifactId>
 	<version>${project.version}</version>
 </dependency>
 ```
-
-### Sample
-
-[https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-sample-security-dingtalk](https://github.com/vindell/spring-boot-starter-samples/tree/master/spring-boot-sample-security-dingtalk "spring-boot-sample-security-dingtalk")
-
