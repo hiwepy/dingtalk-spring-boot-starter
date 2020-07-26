@@ -17,13 +17,13 @@ package com.dingtalk.spring.boot.cache;
 
 public interface LocalCache<K, V> {
 	
-	/**
+	/*
 	 * Returns the value associated with {@code key} in this cache, or {@code null}
 	 * if there is no cached value for {@code key}.
 	 **/
 	V get(K key) throws Exception;
 
-	/**
+	/*
 	 * Associates {@code value} with {@code key} in this cache. If the cache
 	 * previously contained a value associated with {@code key}, the old value is
 	 * replaced by {@code value}.
@@ -31,7 +31,7 @@ public interface LocalCache<K, V> {
 	 **/
 	void put(K key, V value);
 
-	/**
+	/*
 	 * Discards any cached value for key {@code key}.
 	 */
 	void remove(Object key);

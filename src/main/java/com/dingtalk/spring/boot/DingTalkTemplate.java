@@ -63,7 +63,7 @@ import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import com.taobao.api.ApiException;
 
-/**
+/*
  * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
  * https://blog.csdn.net/yangguosb/article/details/79762565
  * 
@@ -206,7 +206,7 @@ public class DingTalkTemplate implements InitializingBean {
 		return appSecret;
 	} 
 	
-	/**
+	/*
 	 * 
 	 * 	企业内部开发获取access_token 先从缓存查，再到钉钉查
 	 * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
@@ -230,7 +230,7 @@ public class DingTalkTemplate implements InitializingBean {
 		}
 	}
 	
-	/**
+	/*
 	 * 获取钉钉开放应用的ACCESS_TOKEN
 	 * 
 	 * @param appKey
@@ -252,7 +252,7 @@ public class DingTalkTemplate implements InitializingBean {
 		}
 	}
 	
-	/**
+	/*
 	 * 企业内部应用免登录：通过免登授权码和access_token获取用户信息
 	 * https://ding-doc.dingtalk.com/doc#/serverapi2/clotub
 	 * @throws ApiException 
@@ -265,7 +265,7 @@ public class DingTalkTemplate implements InitializingBean {
 		return client.execute(request, accessToken);
 	}
 	
-	/**
+	/*
 	 * 第三方应用钉钉扫码登录：通过临时授权码Code获取用户信息，临时授权码只能使用一次。
 	 * https://open-doc.dingtalk.com/microapp/serverapi2/kymkv6
 	 * @throws ApiException 
@@ -277,7 +277,7 @@ public class DingTalkTemplate implements InitializingBean {
 		return client.execute(request, accessKey, accessSecret);
 	}
 	
-	/**
+	/*
 	 * 根据unionid获取userid
 	 * https://open-doc.dingtalk.com/microapp/serverapi2/ege851#-5
 	 * @throws ApiException 
@@ -292,7 +292,7 @@ public class DingTalkTemplate implements InitializingBean {
 		return client.execute(request, accessToken);
 	}
 	
-	/**
+	/*
 	 * 获取用户授权的持久授权码
 	 * 
 	 * @param accessToken
@@ -306,7 +306,7 @@ public class DingTalkTemplate implements InitializingBean {
 		return response.getBody();
 	}
 
-	/**
+	/*
 	 * 获取用户授权的SNS_TOKEN
 	 * 
 	 * @param openId
@@ -323,7 +323,7 @@ public class DingTalkTemplate implements InitializingBean {
 		return response.getSnsToken();
 	}
 
-	/**
+	/*
 	 * 获取用户授权的个人信息
 	 * 
 	 * @param snsToken
@@ -343,7 +343,7 @@ public class DingTalkTemplate implements InitializingBean {
 		return response.getBody();
 	}
 
-	/**
+	/*
 	 * 根据钉钉的userid拿取用户的详细信息(包括手机号，部门id，等)
 	 * https://open-doc.dingtalk.com/microapp/serverapi2/ege851
 	 * @throws ApiException 
@@ -358,7 +358,7 @@ public class DingTalkTemplate implements InitializingBean {
 		return client.execute(request, accessToken);
 	}
 
-	/**
+	/*
 	 * 获取部门详情（根据部门id查询）
 	 * 
 	 * @param accessToken
@@ -375,7 +375,7 @@ public class DingTalkTemplate implements InitializingBean {
 	}
 
 	
-	/**
+	/*
 	   * 获得ticket,不强制刷新ticket.
 	   *
 	   * @see #getTicket(TicketType, boolean)
@@ -389,7 +389,7 @@ public class DingTalkTemplate implements InitializingBean {
 	  }
 	   
 	  
-	/**
+	/*
 	 *	 创建调用jsapi时所需要的签名.
 	 * 	详情请见：https://ding-doc.dingtalk.com/doc#/dev/uwa7vs
 	 */
