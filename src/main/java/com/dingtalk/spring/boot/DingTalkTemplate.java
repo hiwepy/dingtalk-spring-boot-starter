@@ -26,35 +26,14 @@ import org.springframework.util.CollectionUtils;
 import com.alibaba.fastjson.JSONObject;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
-import com.dingtalk.api.request.OapiDepartmentGetRequest;
-import com.dingtalk.api.request.OapiGetJsapiTicketRequest;
 import com.dingtalk.api.request.OapiGettokenRequest;
-import com.dingtalk.api.request.OapiSnsGetPersistentCodeRequest;
-import com.dingtalk.api.request.OapiSnsGetSnsTokenRequest;
 import com.dingtalk.api.request.OapiSnsGettokenRequest;
-import com.dingtalk.api.request.OapiSnsGetuserinfoBycodeRequest;
-import com.dingtalk.api.request.OapiSnsGetuserinfoRequest;
-import com.dingtalk.api.request.OapiUserGetRequest;
-import com.dingtalk.api.request.OapiUserGetUseridByUnionidRequest;
-import com.dingtalk.api.request.OapiUserGetuserinfoRequest;
-import com.dingtalk.api.response.OapiDepartmentGetResponse;
-import com.dingtalk.api.response.OapiGetJsapiTicketResponse;
 import com.dingtalk.api.response.OapiGettokenResponse;
-import com.dingtalk.api.response.OapiSnsGetPersistentCodeResponse;
-import com.dingtalk.api.response.OapiSnsGetSnsTokenResponse;
 import com.dingtalk.api.response.OapiSnsGettokenResponse;
-import com.dingtalk.api.response.OapiSnsGetuserinfoBycodeResponse;
-import com.dingtalk.api.response.OapiSnsGetuserinfoResponse;
-import com.dingtalk.api.response.OapiUserGetResponse;
-import com.dingtalk.api.response.OapiUserGetUseridByUnionidResponse;
-import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
-import com.dingtalk.spring.boot.bean.JsapiTicketSignature;
 import com.dingtalk.spring.boot.property.DingTalkCropAppProperties;
 import com.dingtalk.spring.boot.property.DingTalkLoginProperties;
 import com.dingtalk.spring.boot.property.DingTalkPersonalMiniAppProperties;
 import com.dingtalk.spring.boot.property.DingTalkSuiteProperties;
-import com.dingtalk.spring.boot.utils.DingTalkUtils;
-import com.dingtalk.spring.boot.utils.RandomUtils;
 import com.google.common.base.Optional;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -75,6 +54,10 @@ public class DingTalkTemplate implements InitializingBean {
 	private final String METHOD_GET = "GET";
 	private Map<String, String> appKeySecret = new ConcurrentHashMap<>();
 	private final DingTalkProperties dingtalkProperties;
+	
+	private final DingTalkAccountOperations accountOps = new DingTalkAccountOperations(this);
+	private final DingTalkSnsOperations snsOps = new DingTalkSnsOperations(this);
+	private final DingTalkSsoOperations ssoOps = new DingTalkSsoOperations(this);
 	
 	public DingTalkTemplate(DingTalkProperties dingtalkProperties) {
 		this.dingtalkProperties = dingtalkProperties;
@@ -212,8 +195,8 @@ public class DingTalkTemplate implements InitializingBean {
 	 * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
 	 * @param appKey    企业Id
 	 * @param appSecret 企业应用的凭证密钥
-	 * @return
-	 * @throws ExecutionException
+	 * @return the AccessToken
+	 * @throws ApiException if get AccessToken Exception
 	 */
 	public String getAccessToken(String appKey, String appSecret) throws ApiException {
 		try {
@@ -230,15 +213,15 @@ public class DingTalkTemplate implements InitializingBean {
 		}
 	}
 	
-	/*
+	/**
 	 * 获取钉钉开放应用的ACCESS_TOKEN
 	 * 
-	 * @param appKey
-	 * @param appSecret
-	 * @return
-	 * @throws ExecutionException
+	 * @param appId    企业Id
+	 * @param appSecret 企业应用的凭证密钥
+	 * @return the AccessToken
+	 * @throws ApiException if get AccessToken Exception
 	 */
-	public String getOpenToken(String appId, String appSecret) throws ApiException {
+	public String getSnsAccessToken(String appId, String appSecret) throws ApiException {
 		try {
 			
 			JSONObject key = new JSONObject();
@@ -251,163 +234,17 @@ public class DingTalkTemplate implements InitializingBean {
 			throw new ApiException(e);
 		}
 	}
-	
-	/*
-	 * 企业内部应用免登录：通过免登授权码和access_token获取用户信息
-	 * https://ding-doc.dingtalk.com/doc#/serverapi2/clotub
-	 * @throws ApiException 
-	 */
-	public OapiUserGetuserinfoResponse getUserinfoBycode( String code, String accessToken) throws ApiException {
-		DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/user/getuserinfo");
-		OapiUserGetuserinfoRequest request = new OapiUserGetuserinfoRequest();
-		request.setCode(code);
-		request.setHttpMethod(METHOD_GET);
-		return client.execute(request, accessToken);
-	}
-	
-	/*
-	 * 第三方应用钉钉扫码登录：通过临时授权码Code获取用户信息，临时授权码只能使用一次。
-	 * https://open-doc.dingtalk.com/microapp/serverapi2/kymkv6
-	 * @throws ApiException 
-	 */
-	public OapiSnsGetuserinfoBycodeResponse getSnsGetuserinfoBycode( String code, String accessKey, String accessSecret) throws ApiException {
-		DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/getuserinfo_bycode");
-		OapiSnsGetuserinfoBycodeRequest request = new OapiSnsGetuserinfoBycodeRequest();
-		request.setTmpAuthCode(code);
-		return client.execute(request, accessKey, accessSecret);
-	}
-	
-	/*
-	 * 根据unionid获取userid
-	 * https://open-doc.dingtalk.com/microapp/serverapi2/ege851#-5
-	 * @throws ApiException 
-	 */
-	public OapiUserGetUseridByUnionidResponse getUseridByUnionid( String unionid, String accessToken) throws ApiException {
-		
-		DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/user/getUseridByUnionid");
-		OapiUserGetUseridByUnionidRequest request = new OapiUserGetUseridByUnionidRequest();
-		request.setUnionid(unionid);
-		request.setHttpMethod(METHOD_GET);
-		
-		return client.execute(request, accessToken);
-	}
-	
-	/*
-	 * 获取用户授权的持久授权码
-	 * 
-	 * @param accessToken
-	 * @return
-	 */
-	public String getPersistentCode(String accessToken, String code) throws ApiException  {
-		DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/get_persistent_code");
-		OapiSnsGetPersistentCodeRequest request = new OapiSnsGetPersistentCodeRequest();
-		request.setTmpAuthCode(code);
-		OapiSnsGetPersistentCodeResponse response = client.execute(request, accessToken);
-		return response.getBody();
+
+	public DingTalkAccountOperations opsForAccount() {
+		return accountOps;
 	}
 
-	/*
-	 * 获取用户授权的SNS_TOKEN
-	 * 
-	 * @param openId
-	 * @param persistentCode
-	 * @param accessToken    开放应用的token
-	 * @return
-	 */
-	public String getSnsToken(String openId, String persistentCode, String accessToken) throws ApiException {
-		DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/get_sns_token");
-		OapiSnsGetSnsTokenRequest request = new OapiSnsGetSnsTokenRequest();
-		request.setOpenid(openId);
-		request.setPersistentCode(persistentCode);
-		OapiSnsGetSnsTokenResponse response = client.execute(request, accessToken);
-		return response.getSnsToken();
-	}
-
-	/*
-	 * 获取用户授权的个人信息
-	 * 
-	 * @param snsToken
-	 * @return
-	 */
-	public String get_sns_userinfo_unionid(String snsToken) throws ApiException{
-		OapiSnsGetuserinfoResponse response = null;
-		try {
-			DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/getuserinfo");
-			OapiSnsGetuserinfoRequest request = new OapiSnsGetuserinfoRequest();
-			request.setSnsToken(snsToken);
-			request.setHttpMethod(METHOD_GET);
-			response = client.execute(request);
-		} catch (ApiException e) {
-			e.printStackTrace();
-		}
-		return response.getBody();
-	}
-
-	/*
-	 * 根据钉钉的userid拿取用户的详细信息(包括手机号，部门id，等)
-	 * https://open-doc.dingtalk.com/microapp/serverapi2/ege851
-	 * @throws ApiException 
-	 */
-	public OapiUserGetResponse getUserByUserid( String userid, String accessToken) throws ApiException {
-		
-		DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/user/get");
-		OapiUserGetRequest request = new OapiUserGetRequest();
-		request.setUserid(userid);
-		request.setHttpMethod(METHOD_GET);
-		
-		return client.execute(request, accessToken);
-	}
-
-	/*
-	 * 获取部门详情（根据部门id查询）
-	 * 
-	 * @param accessToken
-	 * @param deptid
-	 * @return
-	 * @throws ApiException
-	 */
-	public OapiDepartmentGetResponse getDepartmentInfo(String accessToken, String deptid) throws ApiException {
-		DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/department/get");
-		OapiDepartmentGetRequest request = new OapiDepartmentGetRequest();
-		request.setId(deptid);
-		request.setHttpMethod(METHOD_GET);
-		return client.execute(request, accessToken);
-	}
-
-	
-	/*
-	   * 获得ticket,不强制刷新ticket.
-	   *
-	   * @see #getTicket(TicketType, boolean)
-	   */
-	  String getJsapiTicket(TicketType type, String accessToken) throws ApiException {
-		  DefaultDingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/get_jsapi_ticket");
-		  OapiGetJsapiTicketRequest req = new OapiGetJsapiTicketRequest();
-		  req.setTopHttpMethod("GET");
-		  OapiGetJsapiTicketResponse execute = client.execute(req, accessToken);
-		  return execute.getTicket();
-	  }
-	   
-	  
-	/*
-	 *	 创建调用jsapi时所需要的签名.
-	 * 	详情请见：https://ding-doc.dingtalk.com/doc#/dev/uwa7vs
-	 */
-	public JsapiTicketSignature createJsapiSignature(String url, String agentId, String accessToken) throws ApiException {
-		
-		long timestamp = System.currentTimeMillis() / 1000;
-	    String randomStr = RandomUtils.getRandomStr();
-	    String jsapiTicket = getJsapiTicket(TicketType.JSAPI, accessToken);
-	    String signature = DingTalkUtils.sign(jsapiTicket, randomStr, timestamp, url);
-	    JsapiTicketSignature jsapiSignature = new JsapiTicketSignature();
-	    jsapiSignature.setAgentId(agentId);
-	    jsapiSignature.setTimestamp(timestamp);
-	    jsapiSignature.setNonceStr(randomStr);
-	    jsapiSignature.setUrl(url);
-	    jsapiSignature.setSignature(signature);
-	    return jsapiSignature;
-		
+	public DingTalkSnsOperations opsForSns() {
+		return snsOps;
 	}
 	
-
+	public DingTalkSsoOperations opsForSso() {
+		return ssoOps;
+	}
+	
 }
