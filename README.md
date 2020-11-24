@@ -14,6 +14,6 @@ dingtalk starter for spring boot
 <dependency>
 	<groupId>${project.groupId}</groupId>
 	<artifactId>dingtalk-spring-boot-starter</artifactId>
-	<version>${project.version}</version>
+	<version>1.0.4.RELEASE</version>
 </dependency>
 ```
