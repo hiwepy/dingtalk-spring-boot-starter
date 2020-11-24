@@ -58,6 +58,7 @@ public class DingTalkTemplate implements InitializingBean {
 	private final DingTalkAccountOperations accountOps = new DingTalkAccountOperations(this);
 	private final DingTalkSnsOperations snsOps = new DingTalkSnsOperations(this);
 	private final DingTalkSsoOperations ssoOps = new DingTalkSsoOperations(this);
+	private final DingTalkJsapiOperations jsapiOps = new DingTalkJsapiOperations(this);
 	
 	public DingTalkTemplate(DingTalkProperties dingtalkProperties) {
 		this.dingtalkProperties = dingtalkProperties;
@@ -245,6 +246,10 @@ public class DingTalkTemplate implements InitializingBean {
 	
 	public DingTalkSsoOperations opsForSso() {
 		return ssoOps;
+	}
+	
+	public DingTalkJsapiOperations opsForJsapi() {
+		return jsapiOps;
 	}
 	
 }

@@ -23,11 +23,8 @@ import com.dingtalk.spring.boot.utils.DingTalkUtils;
 import com.dingtalk.spring.boot.utils.RandomUtils;
 import com.taobao.api.ApiException;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  */
-@Slf4j
 public class DingTalkJsapiOperations extends DingTalkOperations {
 
 	public DingTalkJsapiOperations(DingTalkTemplate template) {
@@ -39,7 +36,7 @@ public class DingTalkJsapiOperations extends DingTalkOperations {
 	 *
 	 * @see #getTicket(TicketType, boolean)
 	 */
-	public OapiGetJsapiTicketResponse getJsapiTicket(TicketType type, String accessToken) throws ApiException {
+	public OapiGetJsapiTicketResponse getTicket(TicketType type, String accessToken) throws ApiException {
 		DefaultDingTalkClient client = new DefaultDingTalkClient(PREFIX + "/get_jsapi_ticket");
 		OapiGetJsapiTicketRequest req = new OapiGetJsapiTicketRequest();
 		req.setTopHttpMethod(METHOD_GET);
@@ -49,12 +46,12 @@ public class DingTalkJsapiOperations extends DingTalkOperations {
 	/*
 	 * 创建调用jsapi时所需要的签名. 详情请见：https://ding-doc.dingtalk.com/doc#/dev/uwa7vs
 	 */
-	public JsapiTicketSignature createJsapiSignature(String url, String agentId, String accessToken)
+	public JsapiTicketSignature createSignature(String url, String agentId, String accessToken)
 			throws ApiException {
 
 		long timestamp = System.currentTimeMillis() / 1000;
 		String randomStr = RandomUtils.getRandomStr();
-		OapiGetJsapiTicketResponse jsapiTicket = getJsapiTicket(TicketType.JSAPI, accessToken);
+		OapiGetJsapiTicketResponse jsapiTicket = getTicket(TicketType.JSAPI, accessToken);
 		String signature = DingTalkUtils.sign(jsapiTicket.getTicket(), randomStr, timestamp, url);
 		JsapiTicketSignature jsapiSignature = new JsapiTicketSignature();
 		jsapiSignature.setAgentId(agentId);
