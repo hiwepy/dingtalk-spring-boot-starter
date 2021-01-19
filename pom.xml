@@ -366,6 +366,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<guava.version>30.0-jre</guava.version>
 		<fastjson.version>1.2.75</fastjson.version>
+		<dingtalk-sdk.version>1.0.1</dingtalk-sdk.version>
 		<maven.version>3.0</maven.version>
        	<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
@@ -473,12 +474,12 @@
 		    <artifactId>fastjson</artifactId>
 		</dependency>
 		
-		<!--钉钉SDK : https://open-doc.dingtalk.com/microapp/faquestions/vzbp02-->
+		<!--钉钉SDK : https://open-doc.dingtalk.com/microapp/faquestions/vzbp02 -->
+		<!-- https://mvnrepository.com/artifact/com.aliyun/alibaba-dingtalk-service-sdk -->
 		<dependency>
-			<groupId>com.dingtalk</groupId>
-			<artifactId>dingtalk-sdk</artifactId>
-			<version>20190704</version>
-			<scope>provided</scope>
+		    <groupId>com.aliyun</groupId>
+		    <artifactId>alibaba-dingtalk-service-sdk</artifactId>
+		    <version>${dingtalk-sdk.version}</version>
 		</dependency>
 		
 	</dependencies>
