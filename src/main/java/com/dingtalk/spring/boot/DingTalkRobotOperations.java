@@ -69,4 +69,15 @@ public class DingTalkRobotOperations extends DingTalkOperations {
 		return client.execute(request);
 	}
     
+    public OapiRobotSendResponse sendMessageByUrl(String webhook, String secret, OapiRobotSendRequest request) throws ApiException {
+		Long timestamp = System.currentTimeMillis();
+		
+        String sign =  template.getSign(secret, timestamp);
+        StringBuilder serverUrl = new StringBuilder(webhook).append("&timestamp=").append(timestamp).append("&sign=").append(sign);
+	        
+		DingTalkClient client = new DefaultDingTalkClient(serverUrl.toString());
+		request.setTimestamp(timestamp);		
+		return client.execute(request);
+	}
+    
 }
