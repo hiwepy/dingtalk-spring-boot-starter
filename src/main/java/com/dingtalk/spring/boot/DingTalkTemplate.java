@@ -15,11 +15,17 @@
  */
 package com.dingtalk.spring.boot;
 
+import java.net.URLEncoder;
+import java.util.Base64;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.CollectionUtils;
 
@@ -33,6 +39,7 @@ import com.dingtalk.api.response.OapiSnsGettokenResponse;
 import com.dingtalk.spring.boot.property.DingTalkCropAppProperties;
 import com.dingtalk.spring.boot.property.DingTalkLoginProperties;
 import com.dingtalk.spring.boot.property.DingTalkPersonalMiniAppProperties;
+import com.dingtalk.spring.boot.property.DingTalkRobotProperties;
 import com.dingtalk.spring.boot.property.DingTalkSuiteProperties;
 import com.google.common.base.Optional;
 import com.google.common.cache.CacheBuilder;
@@ -42,12 +49,15 @@ import com.google.common.cache.RemovalListener;
 import com.google.common.cache.RemovalNotification;
 import com.taobao.api.ApiException;
 
+import lombok.extern.slf4j.Slf4j;
+
 /*
  * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
  * https://blog.csdn.net/yangguosb/article/details/79762565
  * 
  * @author ： <a href="https://github.com/hiwepy">wandl</a>
  */
+@Slf4j
 public class DingTalkTemplate implements InitializingBean {
 
 	private final String DINGTALK_SERVICE = "https://oapi.dingtalk.com";
@@ -59,6 +69,7 @@ public class DingTalkTemplate implements InitializingBean {
 	private final DingTalkSnsOperations snsOps = new DingTalkSnsOperations(this);
 	private final DingTalkSsoOperations ssoOps = new DingTalkSsoOperations(this);
 	private final DingTalkJsapiOperations jsapiOps = new DingTalkJsapiOperations(this);
+	private final DingTalkRobotOperations robotOps = new DingTalkRobotOperations(this);
 	
 	public DingTalkTemplate(DingTalkProperties dingtalkProperties) {
 		this.dingtalkProperties = dingtalkProperties;
@@ -235,6 +246,38 @@ public class DingTalkTemplate implements InitializingBean {
 			throw new ApiException(e);
 		}
 	}
+	
+	/**
+     * 计算签名
+     * 参考：https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq/9e91d73c
+     *
+     * @param secret    密钥，机器人安全设置页面，加签一栏下面显示的SEC开头的字符
+     * @param timestamp 当前时间戳，毫秒级单位
+     * @return 根据时间戳计算后的签名信息
+     */
+	public String getSign(String secret, Long timestamp) {
+        try {
+            String stringToSign = timestamp + "\n" + secret;
+            Mac mac = Mac.getInstance("HmacSHA256");
+            mac.init(new SecretKeySpec(secret.getBytes("UTF-8"), "HmacSHA256"));
+            byte[] signData = mac.doFinal(stringToSign.getBytes("UTF-8"));
+            String sign = URLEncoder.encode(new String(Base64.getEncoder().encode(signData)), "UTF-8");
+            log.debug("【发送钉钉群消息】获取到签名sign = {}", sign);
+            return sign;
+        } catch (Exception e) {
+            log.error("【发送钉钉群消息】计算签名异常，errMsg = {}", e);
+            return null;
+        }
+    }
+	
+	public DingTalkRobotProperties getRobotProperties(String robotId) {
+		for (DingTalkRobotProperties properties : dingtalkProperties.getRobots()) {
+			if(StringUtils.equals(properties.getRobotId(), robotId)) {
+				return properties;
+			}
+		}
+        return null;
+    }
 
 	public DingTalkAccountOperations opsForAccount() {
 		return accountOps;
@@ -250,6 +293,10 @@ public class DingTalkTemplate implements InitializingBean {
 	
 	public DingTalkJsapiOperations opsForJsapi() {
 		return jsapiOps;
+	}
+	
+	public DingTalkRobotOperations opsForRobot() {
+		return robotOps;
 	}
 	
 }

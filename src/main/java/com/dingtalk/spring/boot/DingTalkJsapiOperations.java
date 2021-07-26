@@ -27,6 +27,8 @@ import com.taobao.api.ApiException;
  */
 public class DingTalkJsapiOperations extends DingTalkOperations {
 
+	DefaultDingTalkClient client = new DefaultDingTalkClient(PREFIX + "/get_jsapi_ticket");
+	
 	public DingTalkJsapiOperations(DingTalkTemplate template) {
 		super(template);
 	}
@@ -37,7 +39,6 @@ public class DingTalkJsapiOperations extends DingTalkOperations {
 	 * @see #getTicket(TicketType, boolean)
 	 */
 	public OapiGetJsapiTicketResponse getTicket(TicketType type, String accessToken) throws ApiException {
-		DefaultDingTalkClient client = new DefaultDingTalkClient(PREFIX + "/get_jsapi_ticket");
 		OapiGetJsapiTicketRequest req = new OapiGetJsapiTicketRequest();
 		req.setTopHttpMethod(METHOD_GET);
 		return client.execute(req, accessToken);

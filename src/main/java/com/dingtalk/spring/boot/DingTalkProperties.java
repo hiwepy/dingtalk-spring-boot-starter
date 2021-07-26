@@ -7,6 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import com.dingtalk.spring.boot.property.DingTalkCropAppProperties;
 import com.dingtalk.spring.boot.property.DingTalkLoginProperties;
 import com.dingtalk.spring.boot.property.DingTalkPersonalMiniAppProperties;
+import com.dingtalk.spring.boot.property.DingTalkRobotProperties;
 import com.dingtalk.spring.boot.property.DingTalkSuiteProperties;
 
 import lombok.Getter;
@@ -42,5 +43,9 @@ public class DingTalkProperties {
 	 *	 移动接入应用：扫码登录配置
 	 */
 	private List<DingTalkLoginProperties> logins;
+	/**
+	 *	 Dingtalk：机器人配置
+	 */
+	private List<DingTalkRobotProperties> robots;
 	
 }
