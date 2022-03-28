@@ -1,14 +1,15 @@
 # dingtalk-spring-boot-starter
 dingtalk starter for spring boot
 
-### 说明
+### 组件简介
 
+> 基于钉钉 SDK 的 Spring Boot Starter 实现
+> 
+> sdasd 
 
- > 基于 Security 的 Spring Boot Starter 实现
+### 使用说明
 
-1. 实现基于钉钉扫码的认证
-
-### Maven
+##### 1、Spring Boot 项目添加 Maven 依赖
 
 ``` xml
 <dependency>
@@ -35,7 +36,11 @@ dingtalk:
     app-secret: 企业内部开发：应用的密钥
   logins:
   - app-id: 移动接入应用-扫码登录应用的appId
-    app-secret: 移动接入应用-扫码登录应用的appSecret        
+    app-secret: 移动接入应用-扫码登录应用的appSecret
+  robots:
+  - robot-id: robot-
+    access-token: xxxx
+    secret-token: xxxxx  
 ```
 
 ##### 3、使用示例
