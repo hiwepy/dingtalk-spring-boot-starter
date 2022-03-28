@@ -35,6 +35,7 @@ import com.dingtalk.spring.boot.bean.MarkdownMessage;
 import com.dingtalk.spring.boot.bean.TextMessage;
 import com.dingtalk.spring.boot.property.DingTalkRobotProperties;
 import com.taobao.api.ApiException;
+import org.apache.commons.lang3.ArrayUtils;
 
 /**
  */
@@ -43,7 +44,7 @@ public class DingTalkRobotOperations extends DingTalkOperations {
 	public DingTalkRobotOperations(DingTalkTemplate template) {
 		super(template);
 	}
-	
+
 	protected String getWebhook(String robotId, Long timestamp) {
 		DingTalkRobotProperties poperties = template.getRobotProperties(robotId);
         StringBuilder serverUrl = new StringBuilder(PREFIX + "/robot/send?access_token=").append(poperties.getAccessToken());
@@ -51,13 +52,13 @@ public class DingTalkRobotOperations extends DingTalkOperations {
         serverUrl.append("&timestamp=").append(timestamp).append("&sign=").append(sign);
         return serverUrl.toString();
     }
-	
+
     public String getUserMobile(String access_token, String userid,  String lang) {
         try {
             DingTalkClient client = new DefaultDingTalkClient(PREFIX + "/topapi/v2/user/get");
             OapiV2UserGetRequest req = new OapiV2UserGetRequest();
             req.setUserid(userid);
-            req.setLang(lang);
+            req.setLanguage(lang);
             OapiV2UserGetResponse rsp = client.execute(req, access_token);
             System.out.println(rsp.getBody());
             return rsp.getResult().getMobile();
@@ -74,45 +75,46 @@ public class DingTalkRobotOperations extends DingTalkOperations {
 
 		switch (message.getMsgtype()) {
 			case actionCard:{
-				
+
 			};break;
 			case feedCard:{
-							
+
 			};break;
 			case link:{
-				
+
 			};break;
 			case markdown:{
-				
+
 			};break;
 			case text:{
-				
+
 				TextMessage msg = (TextMessage) message;
-				
+
 				OapiRobotSendRequest.Text text = new OapiRobotSendRequest.Text();
 				text.setContent(msg.getContent());
 				request.setText(text);
-				
-				OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
-				at.setAtMobiles(Arrays.asList(msg.getAtMobiles()));
-				at.setIsAtAll(msg.isAtAll()); 
+                OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
+				if(ArrayUtils.isNotEmpty(msg.getAtMobiles())){
+                    at.setAtMobiles(Arrays.asList(msg.getAtMobiles()));
+                }
+				at.setIsAtAll(msg.isAtAll());
 				request.setAt(at);
-				
+
 			};break;
 		}
-		
+
 
 		return request;
     }
-    
+
     public OapiRobotSendResponse sendMessage(String robotId, BaseMessage message) throws ApiException {
 		return this.sendMessage(robotId, this.buidRequest(message));
 	}
-    
+
     public OapiRobotSendResponse sendMessage(String robotId, OapiRobotSendRequest request) throws ApiException {
   		Long timestamp = System.currentTimeMillis();
   		DingTalkClient client = new DefaultDingTalkClient(this.getWebhook(robotId, timestamp));
-  		request.setTimestamp(timestamp);		
+  		request.setTimestamp(timestamp);
   		return client.execute(request);
   	}
 
@@ -122,7 +124,7 @@ public class DingTalkRobotOperations extends DingTalkOperations {
     public OapiRobotSendResponse sendTextMessage(String robotId, TextMessage message) throws ApiException {
 		return this.sendMessage(robotId, this.buidRequest(message));
     }
-    
+
     /*
      * 发送文本消息到钉钉
      */
@@ -241,20 +243,20 @@ public class DingTalkRobotOperations extends DingTalkOperations {
     public OapiRobotSendResponse sendFeedCardMessage(String robotId, List<FeedCardMessageItem> feedCardItems) throws ApiException {
         return this.sendMessage(robotId, new FeedCardMessage(feedCardItems));
     }
-    
+
     public OapiRobotSendResponse sendMessageByUrl(String webhook, String secret, BaseMessage message) throws ApiException {
 		return this.sendMessageByUrl(webhook, secret, this.buidRequest(message));
 	}
-    
+
     public OapiRobotSendResponse sendMessageByUrl(String webhook, String secret, OapiRobotSendRequest request) throws ApiException {
 		Long timestamp = System.currentTimeMillis();
-		
+
         String sign =  template.getSign(secret, timestamp);
         StringBuilder serverUrl = new StringBuilder(webhook).append("&timestamp=").append(timestamp).append("&sign=").append(sign);
-	        
+
 		DingTalkClient client = new DefaultDingTalkClient(serverUrl.toString());
-		request.setTimestamp(timestamp);		
+		request.setTimestamp(timestamp);
 		return client.execute(request);
 	}
-    
+
 }
