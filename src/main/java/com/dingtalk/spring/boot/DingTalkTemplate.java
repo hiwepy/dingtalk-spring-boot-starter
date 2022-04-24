@@ -70,7 +70,8 @@ public class DingTalkTemplate implements InitializingBean {
 	private final DingTalkSsoOperations ssoOps = new DingTalkSsoOperations(this);
 	private final DingTalkJsapiOperations jsapiOps = new DingTalkJsapiOperations(this);
 	private final DingTalkRobotOperations robotOps = new DingTalkRobotOperations(this);
-	
+	private final DingTalkUserOperations userOps = new DingTalkUserOperations(this);
+
 	public DingTalkTemplate(DingTalkProperties dingtalkProperties) {
 		this.dingtalkProperties = dingtalkProperties;
 	}
@@ -298,5 +299,9 @@ public class DingTalkTemplate implements InitializingBean {
 	public DingTalkRobotOperations opsForRobot() {
 		return robotOps;
 	}
-	
+
+	public DingTalkUserOperations opsForUser() {
+		return userOps;
+	}
+
 }
