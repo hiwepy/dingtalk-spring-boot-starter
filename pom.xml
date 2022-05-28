@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.0.RELEASE</version>
+		<version>2.6.0</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<groupId>com.github.hiwepy</groupId>
 	<artifactId>dingtalk-spring-boot-starter</artifactId>
 	<description>Spring Boot Starter For DingTalk Client </description>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>2.0.0-SNAPSHOT</version>
 	<name>${project.groupId}:${project.artifactId}</name>
 	<url>https://github.com/hiwepy/${project.artifactId}</url>
 	<packaging>jar</packaging>
@@ -356,7 +356,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<guava.version>30.0-jre</guava.version>
-		<fastjson.version>1.2.75</fastjson.version>
 		<dingtalk-sdk.version>2.0.0</dingtalk-sdk.version>
 		<maven.version>3.0</maven.version>
        	<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
@@ -375,13 +374,6 @@
 			    <groupId>com.google.guava</groupId>
 			    <artifactId>guava</artifactId>
 			    <version>${guava.version}</version>
-			</dependency>
-
-			<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-			<dependency>
-			    <groupId>com.alibaba</groupId>
-			    <artifactId>fastjson</artifactId>
-			    <version>${fastjson.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -457,12 +449,6 @@
 		<dependency>
 		    <groupId>com.google.guava</groupId>
 		    <artifactId>guava</artifactId>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-		<dependency>
-		    <groupId>com.alibaba</groupId>
-		    <artifactId>fastjson</artifactId>
 		</dependency>
 
 		<!--钉钉SDK : https://open-doc.dingtalk.com/microapp/faquestions/vzbp02 -->

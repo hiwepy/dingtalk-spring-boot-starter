@@ -18,18 +18,22 @@ package com.dingtalk.spring.boot;
 import java.net.URLEncoder;
 import java.util.Base64;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.ImmutableMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.CollectionUtils;
 
-import com.alibaba.fastjson.JSONObject;
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
 import com.dingtalk.api.request.OapiGettokenRequest;
@@ -54,7 +58,7 @@ import lombok.extern.slf4j.Slf4j;
 /*
  * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
  * https://blog.csdn.net/yangguosb/article/details/79762565
- * 
+ *
  * @author ： <a href="https://github.com/hiwepy">wandl</a>
  */
 @Slf4j
@@ -62,9 +66,10 @@ public class DingTalkTemplate implements InitializingBean {
 
 	private final String DINGTALK_SERVICE = "https://oapi.dingtalk.com";
 	private final String METHOD_GET = "GET";
+	private final String DELIMITER = ",";
 	private Map<String, String> appKeySecret = new ConcurrentHashMap<>();
 	private final DingTalkProperties dingtalkProperties;
-	
+
 	private final DingTalkAccountOperations accountOps = new DingTalkAccountOperations(this);
 	private final DingTalkSnsOperations snsOps = new DingTalkSnsOperations(this);
 	private final DingTalkSsoOperations ssoOps = new DingTalkSsoOperations(this);
@@ -75,10 +80,10 @@ public class DingTalkTemplate implements InitializingBean {
 	public DingTalkTemplate(DingTalkProperties dingtalkProperties) {
 		this.dingtalkProperties = dingtalkProperties;
 	}
-	
+
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		
+
 		if(!CollectionUtils.isEmpty(this.dingtalkProperties.getCropApps())) {
 			for (DingTalkCropAppProperties properties : this.dingtalkProperties.getCropApps()) {
 				appKeySecret.put(properties.getAppKey(), properties.getAppSecret());
@@ -99,9 +104,9 @@ public class DingTalkTemplate implements InitializingBean {
 				appKeySecret.put(properties.getAppId(), properties.getAppSecret());
 			}
 		}
-		
+
 	}
-	
+
 	private final LoadingCache<String, Optional<String>> ACCESS_TOKEN_CACHES = CacheBuilder.newBuilder()
 			// 设置并发级别为8，并发级别是指可以同时写缓存的线程数
 			.concurrencyLevel(8)
@@ -127,15 +132,12 @@ public class DingTalkTemplate implements InitializingBean {
 				public Optional<String> load(String keySecret) throws Exception {
 
 					OapiGettokenRequest request = new OapiGettokenRequest();
+					String[] keySecretArr = StringUtils.split(keySecret, DELIMITER);
+					request.setAppkey(keySecretArr[0]);
+					request.setAppsecret(keySecretArr[1]);
 
-					JSONObject key = JSONObject.parseObject(keySecret);
-					//request.setCorpid(key.getString("corpId"));
-					//request.setCorpsecret(key.getString("corpSecret"));
-					request.setAppkey(key.getString("appKey"));
-					request.setAppsecret(key.getString("appSecret"));
-					
 					request.setHttpMethod(METHOD_GET);
-					
+
 					DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/gettoken");
 					OapiGettokenResponse response = client.execute(request);
 
@@ -173,10 +175,9 @@ public class DingTalkTemplate implements InitializingBean {
 
 					OapiSnsGettokenRequest request = new OapiSnsGettokenRequest();
 
-					JSONObject key = JSONObject.parseObject(keySecret);
-
-					request.setAppid(key.getString("appId"));
-					request.setAppsecret(key.getString("appSecret"));
+					String[] keySecretArr = StringUtils.split(keySecret, DELIMITER);
+					request.setAppid(keySecretArr[0]);
+					request.setAppsecret(keySecretArr[1]);
 					request.setHttpMethod(METHOD_GET);
 
 					DingTalkClient client = new DefaultDingTalkClient(DINGTALK_SERVICE + "/sns/gettoken");
@@ -192,18 +193,18 @@ public class DingTalkTemplate implements InitializingBean {
 				}
 			});
 
-	
+
 	public boolean hasAppKey(String appKey) {
 		return appKeySecret.containsKey(appKey);
-	} 
-	
+	}
+
 	public String getAppSecret(String appKey) {
 		String appSecret = appKeySecret.get(appKey);
 		return appSecret;
-	} 
-	
+	}
+
 	/*
-	 * 
+	 *
 	 * 	企业内部开发获取access_token 先从缓存查，再到钉钉查
 	 * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
 	 * @param appKey    企业Id
@@ -213,22 +214,18 @@ public class DingTalkTemplate implements InitializingBean {
 	 */
 	public String getAccessToken(String appKey, String appSecret) throws ApiException {
 		try {
-			
-			JSONObject key = new JSONObject();
-			key.put("appKey", appKey);
-			key.put("appSecret", appSecret);
-
-			Optional<String> opt = ACCESS_TOKEN_CACHES.get(key.toJSONString());
+			String key = Stream.of(appKey,appSecret).collect(Collectors.joining( DELIMITER));
+			Optional<String> opt = ACCESS_TOKEN_CACHES.get(key);
 			return opt.isPresent() ? opt.get() : null;
-			
+
 		} catch (ExecutionException e) {
 			throw new ApiException(e);
 		}
 	}
-	
+
 	/**
 	 * 获取钉钉开放应用的ACCESS_TOKEN
-	 * 
+	 *
 	 * @param appId    企业Id
 	 * @param appSecret 企业应用的凭证密钥
 	 * @return the AccessToken
@@ -236,18 +233,15 @@ public class DingTalkTemplate implements InitializingBean {
 	 */
 	public String getSnsAccessToken(String appId, String appSecret) throws ApiException {
 		try {
-			
-			JSONObject key = new JSONObject();
-			key.put("appId", appId);
-			key.put("appSecret", appSecret);
-	
-			Optional<String> opt = SNS_ACCESS_TOKEN_CACHES.get(key.toJSONString());
+
+			String key = Stream.of(appId, appSecret).collect(Collectors.joining( DELIMITER));
+			Optional<String> opt = SNS_ACCESS_TOKEN_CACHES.get(key);
 			return opt.isPresent() ? opt.get() : null;
 		} catch (ExecutionException e) {
 			throw new ApiException(e);
 		}
 	}
-	
+
 	/**
      * 计算签名
      * 参考：https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq/9e91d73c
@@ -270,7 +264,7 @@ public class DingTalkTemplate implements InitializingBean {
             return null;
         }
     }
-	
+
 	public DingTalkRobotProperties getRobotProperties(String robotId) {
 		for (DingTalkRobotProperties properties : dingtalkProperties.getRobots()) {
 			if(StringUtils.equals(properties.getRobotId(), robotId)) {
@@ -287,15 +281,15 @@ public class DingTalkTemplate implements InitializingBean {
 	public DingTalkSnsOperations opsForSns() {
 		return snsOps;
 	}
-	
+
 	public DingTalkSsoOperations opsForSso() {
 		return ssoOps;
 	}
-	
+
 	public DingTalkJsapiOperations opsForJsapi() {
 		return jsapiOps;
 	}
-	
+
 	public DingTalkRobotOperations opsForRobot() {
 		return robotOps;
 	}
