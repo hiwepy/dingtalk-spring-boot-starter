@@ -2,6 +2,7 @@ package com.dingtalk.spring.boot;
 
 import java.util.List;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import com.dingtalk.spring.boot.property.DingTalkCropAppProperties;
@@ -15,18 +16,19 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ConfigurationProperties(prefix = DingTalkProperties.PREFIX)
-@Getter
-@Setter
-@ToString
+@Data
 public class DingTalkProperties {
 
 	public static final String PREFIX = "dingtalk";
 
 	/**
-	 * 	企业ID
+	 * 	企业的corpid
 	 */
 	private String corpId;
-	
+	/**
+	 * 企业的密钥
+	 */
+	private String corpSecret;
 	/**
 	 *    企业内部开发：小程序、H5配置
 	 */

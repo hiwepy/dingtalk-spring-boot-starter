@@ -18,7 +18,7 @@ public class DingTalkSuiteProperties {
 	 */
 	private String suiteId;
 	/**
-	 * 	第三方企业应用：应用的唯一标识key
+	 * 	第三方企业应用：应用的唯一标识Id
 	 */
 	private String appId;
 	/**
