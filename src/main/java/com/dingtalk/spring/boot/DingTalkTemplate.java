@@ -133,4 +133,12 @@ public class DingTalkTemplate implements InitializingBean {
 		return userOps;
 	}
 
+	public DingTalkAccessTokenProvider getDingTalkAccessTokenProvider() {
+		return dingTalkAccessTokenProvider;
+	}
+
+	public DingTalkConfigProvider getDingTalkConfigProvider() {
+		return dingTalkConfigProvider;
+	}
+
 }

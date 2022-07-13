@@ -34,7 +34,7 @@ public class DingTalkApplication_Test {
 			
 			template.opsForAccount().getUserinfoBycode(null, null);
 			template.opsForJsapi().createSignature(null, null, null);
-			template.opsForRobot().sendLinkMessage(null, null);
+			template.opsForRobot().sendLinkMessage(null,null, null);
 			template.opsForSns().getUserinfo(null);
 			template.opsForSso().getPersistentCode(null, null);
 			
