@@ -70,44 +70,44 @@ public class DingTalkTemplate implements InitializingBean {
 
 	/**
 	 * 企业的密钥
-	 * @param cropId  企业ID
+	 * @param corpId  企业ID
 	 * @return 企业的密钥
 	 */
-	public String getCorpSecret(String cropId){
-		return dingTalkConfigProvider.getCorpSecret(cropId);
+	public String getCorpSecret(String corpId){
+		return dingTalkConfigProvider.getCorpSecret(corpId);
 	}
 
 	/**
 	 * 应用密钥
-	 * @param cropId  企业ID
+	 * @param corpId  企业ID
 	 * @param appKey 应用Key或Id
 	 * @return 应用密钥
 	 */
-	public String getAppSecret(String cropId, String appKey) {
-		return dingTalkConfigProvider.getAppSecret(cropId, appKey);
+	public String getAppSecret(String corpId, String appKey) {
+		return dingTalkConfigProvider.getAppSecret(corpId, appKey);
 	}
 
 	/**
 	 * 企业内部开发获取access_token 先从缓存查，再到钉钉查
 	 * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
-	 * @param cropId  企业ID
+	 * @param corpId  企业ID
 	 * @param appKey   企业应用Key
 	 * @return the AccessToken
 	 * @throws ApiException if get AccessToken Exception
 	 */
-	public String getAccessToken(String cropId, String appKey) throws ApiException {
-		return dingTalkAccessTokenProvider.getAccessToken(cropId, appKey);
+	public String getAccessToken(String corpId, String appKey) throws ApiException {
+		return dingTalkAccessTokenProvider.getAccessToken(corpId, appKey);
 	}
 	
 	/**
 	 * 获取钉钉开放应用的ACCESS_TOKEN
-	 * @param cropId  企业ID
+	 * @param corpId  企业ID
 	 * @param appId   企业应用Id
 	 * @return the AccessToken
 	 * @throws ApiException if get AccessToken Exception
 	 */
-	public String getSnsAccessToken(String cropId, String appId) throws ApiException {
-		return dingTalkAccessTokenProvider.getSnsAccessToken(cropId, appId);
+	public String getSnsAccessToken(String corpId, String appId) throws ApiException {
+		return dingTalkAccessTokenProvider.getSnsAccessToken(corpId, appId);
 	}
 	
 	/**

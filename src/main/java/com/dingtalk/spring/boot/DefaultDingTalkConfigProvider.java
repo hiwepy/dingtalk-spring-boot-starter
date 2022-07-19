@@ -21,8 +21,8 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        if(!CollectionUtils.isEmpty(this.dingTalkProperties.getCropApps())) {
-            for (DingTalkCropAppProperties properties : this.dingTalkProperties.getCropApps()) {
+        if(!CollectionUtils.isEmpty(this.dingTalkProperties.getCorpApps())) {
+            for (DingTalkCorpAppProperties properties : this.dingTalkProperties.getCorpApps()) {
                 appKeySecret.put(properties.getAppKey(), properties.getAppSecret());
             }
         }
@@ -45,22 +45,22 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
-    public DingTalkProperties getDingTalkProperties(String cropId) {
+    public DingTalkProperties getDingTalkProperties(String corpId) {
         return dingTalkProperties;
     }
 
     @Override
-    public DingTalkCropAppProperties getDingTalkCropAppProperties(String cropId, String agentId) {
-        if(CollectionUtils.isEmpty(dingTalkProperties.getCropApps())){
+    public DingTalkCorpAppProperties getDingTalkCorpAppProperties(String corpId, String agentId) {
+        if(CollectionUtils.isEmpty(dingTalkProperties.getCorpApps())){
             return null;
         }
-        Optional<DingTalkCropAppProperties> optional = dingTalkProperties.getCropApps().stream()
+        Optional<DingTalkCorpAppProperties> optional = dingTalkProperties.getCorpApps().stream()
                 .filter(item -> StringUtils.equals(item.getAgentId(), agentId)).findFirst();
         return optional.isPresent() ? optional.get() : null;
     }
 
     @Override
-    public DingTalkPersonalMiniAppProperties getDingTalkPersonalMiniAppProperties(String cropId, String appId) {
+    public DingTalkPersonalMiniAppProperties getDingTalkPersonalMiniAppProperties(String corpId, String appId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getApps())){
             return null;
         }
@@ -70,7 +70,7 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
-    public DingTalkSuiteProperties getDingTalkSuiteProperties(String cropId, String suiteId) {
+    public DingTalkSuiteProperties getDingTalkSuiteProperties(String corpId, String suiteId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getSuites())){
             return null;
         }
@@ -80,7 +80,7 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
-    public DingTalkLoginProperties getDingTalkLoginProperties(String cropId, String appId) {
+    public DingTalkLoginProperties getDingTalkLoginProperties(String corpId, String appId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getLogins())){
             return null;
         }
@@ -90,7 +90,7 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
-    public DingTalkRobotProperties getDingTalkRobotProperties(String cropId, String robotId) {
+    public DingTalkRobotProperties getDingTalkRobotProperties(String corpId, String robotId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getRobots())){
             return null;
         }
@@ -110,12 +110,12 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
-    public String getCorpSecret(String cropId) {
+    public String getCorpSecret(String corpId) {
         return dingTalkProperties.getCorpSecret();
     }
 
     @Override
-    public String getAppSecret(String cropId, String appKey) {
+    public String getAppSecret(String corpId, String appKey) {
         String appSecret = appKeySecret.get(appKey);
         return appSecret;
     }

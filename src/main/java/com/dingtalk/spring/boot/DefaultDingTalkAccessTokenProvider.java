@@ -20,14 +20,14 @@ public class DefaultDingTalkAccessTokenProvider implements DingTalkAccessTokenPr
     }
 
     @Override
-    public String getAccessToken(String cropId, String appKey) throws ApiException {
+    public String getAccessToken(String corpId, String appKey) throws ApiException {
 
         OapiGettokenRequest request = new OapiGettokenRequest();
 
-        String corpSecret = dingTalkConfigProvider.getCorpSecret(cropId);
-        String appSecret = dingTalkConfigProvider.getAppSecret(cropId, appKey);
+        String corpSecret = dingTalkConfigProvider.getCorpSecret(corpId);
+        String appSecret = dingTalkConfigProvider.getAppSecret(corpId, appKey);
 
-        request.setCorpid(cropId);
+        request.setCorpid(corpId);
         request.setCorpsecret(corpSecret);
         request.setAppkey(appKey);
         request.setAppsecret(appSecret);
@@ -43,9 +43,9 @@ public class DefaultDingTalkAccessTokenProvider implements DingTalkAccessTokenPr
     }
 
     @Override
-    public String getSnsAccessToken(String cropId, String appId) throws ApiException {
+    public String getSnsAccessToken(String corpId, String appId) throws ApiException {
 
-        String appSecret = dingTalkConfigProvider.getAppSecret(cropId, appId);
+        String appSecret = dingTalkConfigProvider.getAppSecret(corpId, appId);
 
         OapiSnsGettokenRequest request = new OapiSnsGettokenRequest();
 

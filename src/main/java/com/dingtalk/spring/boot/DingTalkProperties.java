@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import com.dingtalk.spring.boot.property.DingTalkCropAppProperties;
+import com.dingtalk.spring.boot.property.DingTalkCorpAppProperties;
 import com.dingtalk.spring.boot.property.DingTalkLoginProperties;
 import com.dingtalk.spring.boot.property.DingTalkPersonalMiniAppProperties;
 import com.dingtalk.spring.boot.property.DingTalkRobotProperties;
@@ -32,7 +32,7 @@ public class DingTalkProperties {
 	/**
 	 *    企业内部开发：小程序、H5配置
 	 */
-	private List<DingTalkCropAppProperties> cropApps;
+	private List<DingTalkCorpAppProperties> corpApps;
 	/**
 	 *    第三方个人应用：小程序配置
 	 */

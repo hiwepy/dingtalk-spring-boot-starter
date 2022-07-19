@@ -45,8 +45,8 @@ public class DingTalkRobotOperations extends DingTalkOperations {
 		super(template);
 	}
 
-	protected String getWebhook(String cropId, String robotId, Long timestamp) {
-		DingTalkRobotProperties poperties = template.getDingTalkConfigProvider().getDingTalkRobotProperties(cropId, robotId);
+	protected String getWebhook(String corpId, String robotId, Long timestamp) {
+		DingTalkRobotProperties poperties = template.getDingTalkConfigProvider().getDingTalkRobotProperties(corpId, robotId);
         StringBuilder serverUrl = new StringBuilder(PREFIX + "/robot/send?access_token=").append(poperties.getAccessToken());
         String sign =  template.getSign(poperties.getSecretToken(), timestamp);
         serverUrl.append("&timestamp=").append(timestamp).append("&sign=").append(sign);
@@ -107,13 +107,13 @@ public class DingTalkRobotOperations extends DingTalkOperations {
 		return request;
     }
 
-    public OapiRobotSendResponse sendMessage(String cropId, String robotId, BaseMessage message) throws ApiException {
-		return this.sendMessage(cropId, robotId, this.buidRequest(message));
+    public OapiRobotSendResponse sendMessage(String corpId, String robotId, BaseMessage message) throws ApiException {
+		return this.sendMessage(corpId, robotId, this.buidRequest(message));
 	}
 
-    public OapiRobotSendResponse sendMessage(String cropId, String robotId, OapiRobotSendRequest request) throws ApiException {
+    public OapiRobotSendResponse sendMessage(String corpId, String robotId, OapiRobotSendRequest request) throws ApiException {
   		Long timestamp = System.currentTimeMillis();
-  		DingTalkClient client = new DefaultDingTalkClient(this.getWebhook(cropId, robotId, timestamp));
+  		DingTalkClient client = new DefaultDingTalkClient(this.getWebhook(corpId, robotId, timestamp));
   		request.setTimestamp(timestamp);
   		return client.execute(request);
   	}
@@ -121,127 +121,127 @@ public class DingTalkRobotOperations extends DingTalkOperations {
     /*
      * 发送文本消息到钉钉
      */
-    public OapiRobotSendResponse sendTextMessage(String cropId, String robotId, TextMessage message) throws ApiException {
-		return this.sendMessage(cropId, robotId, this.buidRequest(message));
+    public OapiRobotSendResponse sendTextMessage(String corpId, String robotId, TextMessage message) throws ApiException {
+		return this.sendMessage(corpId, robotId, this.buidRequest(message));
     }
 
     /*
      * 发送文本消息到钉钉
      */
-    public OapiRobotSendResponse sendTextMessage(String cropId, String robotId, String content) throws ApiException {
-        return this.sendMessage(cropId, robotId, new TextMessage(content));
+    public OapiRobotSendResponse sendTextMessage(String corpId, String robotId, String content) throws ApiException {
+        return this.sendMessage(corpId, robotId, new TextMessage(content));
     }
 
     /*
      * 发送文本消息到钉钉
      */
-    public OapiRobotSendResponse sendTextMessage(String cropId, String robotId, String content, String[] atMobiles) throws ApiException {
-        return this.sendMessage(cropId, robotId, new TextMessage(content, atMobiles));
+    public OapiRobotSendResponse sendTextMessage(String corpId, String robotId, String content, String[] atMobiles) throws ApiException {
+        return this.sendMessage(corpId, robotId, new TextMessage(content, atMobiles));
     }
 
     /*
      * 发送文本消息到钉钉
      */
-    public OapiRobotSendResponse sendTextMessage(String cropId, String robotId, String content, boolean isAtAll) throws ApiException {
-        return this.sendMessage(cropId, robotId, new TextMessage(content, isAtAll));
+    public OapiRobotSendResponse sendTextMessage(String corpId, String robotId, String content, boolean isAtAll) throws ApiException {
+        return this.sendMessage(corpId, robotId, new TextMessage(content, isAtAll));
     }
 
     /*
      * 发送Link消息到钉钉
      */
-    public OapiRobotSendResponse sendLinkMessage(String cropId, String robotId, LinkMessage message) throws ApiException {
-        return this.sendMessage(cropId, robotId, message);
+    public OapiRobotSendResponse sendLinkMessage(String corpId, String robotId, LinkMessage message) throws ApiException {
+        return this.sendMessage(corpId, robotId, message);
     }
 
     /*
      * 发送Link消息到钉钉
      */
-    public OapiRobotSendResponse sendLinkMessage(String cropId, String robotId, String title, String text, String messageUrl) throws ApiException {
-        return this.sendMessage(cropId, robotId, new LinkMessage(title, text, messageUrl));
+    public OapiRobotSendResponse sendLinkMessage(String corpId, String robotId, String title, String text, String messageUrl) throws ApiException {
+        return this.sendMessage(corpId, robotId, new LinkMessage(title, text, messageUrl));
     }
 
     /*
      * 发送Link消息到钉钉
      */
-    public OapiRobotSendResponse sendLinkMessage(String cropId, String robotId, String title, String text, String messageUrl, String picUrl) throws ApiException {
-        return this.sendMessage(cropId, robotId, new LinkMessage(title, text, messageUrl, picUrl));
+    public OapiRobotSendResponse sendLinkMessage(String corpId, String robotId, String title, String text, String messageUrl, String picUrl) throws ApiException {
+        return this.sendMessage(corpId, robotId, new LinkMessage(title, text, messageUrl, picUrl));
     }
 
     /*
      * 发送MarkDown消息到钉钉
      */
-    public OapiRobotSendResponse sendMarkdownMessage(String cropId, String robotId, MarkdownMessage message) throws ApiException {
-        return this.sendMessage(cropId, robotId, message);
+    public OapiRobotSendResponse sendMarkdownMessage(String corpId, String robotId, MarkdownMessage message) throws ApiException {
+        return this.sendMessage(corpId, robotId, message);
     }
 
     /*
      * 发送MarkDown消息到钉钉
      */
-    public OapiRobotSendResponse sendMarkdownMessage(String cropId, String robotId, String title, String text) throws ApiException {
-        return this.sendMessage(cropId, robotId, new MarkdownMessage(title, text));
+    public OapiRobotSendResponse sendMarkdownMessage(String corpId, String robotId, String title, String text) throws ApiException {
+        return this.sendMessage(corpId, robotId, new MarkdownMessage(title, text));
     }
 
     /*
      * 发送MarkDown消息到钉钉
      */
-    public OapiRobotSendResponse sendMarkdownMessage(String cropId, String robotId, String title, String text, String[] atMobiles) throws ApiException {
-        return this.sendMessage(cropId, robotId, new MarkdownMessage(title, text, atMobiles));
+    public OapiRobotSendResponse sendMarkdownMessage(String corpId, String robotId, String title, String text, String[] atMobiles) throws ApiException {
+        return this.sendMessage(corpId, robotId, new MarkdownMessage(title, text, atMobiles));
     }
 
     /*
      * 发送MarkDown消息到钉钉
      */
-    public OapiRobotSendResponse sendMarkdownMessage(String cropId, String robotId, String title, String text, boolean isAtAll) throws ApiException {
-        return this.sendMessage(cropId, robotId, new MarkdownMessage(title, text, isAtAll));
+    public OapiRobotSendResponse sendMarkdownMessage(String corpId, String robotId, String title, String text, boolean isAtAll) throws ApiException {
+        return this.sendMessage(corpId, robotId, new MarkdownMessage(title, text, isAtAll));
     }
 
     /*
      * 发送ActionCard消息到钉钉
      */
-    public OapiRobotSendResponse sendActionCardMessage(String cropId, String robotId, ActionCardMessage message) throws ApiException {
-        return this.sendMessage(cropId, robotId, message);
+    public OapiRobotSendResponse sendActionCardMessage(String corpId, String robotId, ActionCardMessage message) throws ApiException {
+        return this.sendMessage(corpId, robotId, message);
     }
 
     /*
      * 发送ActionCard消息到钉钉
      */
-    public OapiRobotSendResponse sendActionCardMessage(String cropId, String robotId, String title, String text) throws ApiException {
-        return this.sendMessage(cropId, robotId, new ActionCardMessage(title, text));
+    public OapiRobotSendResponse sendActionCardMessage(String corpId, String robotId, String title, String text) throws ApiException {
+        return this.sendMessage(corpId, robotId, new ActionCardMessage(title, text));
     }
 
     /*
      * 发送ActionCard消息到钉钉
      */
-    public OapiRobotSendResponse sendActionCardMessage(String cropId, String robotId, String title, String text, HideAvatarType hideAvatar) throws ApiException {
-        return this.sendMessage(cropId, robotId, new ActionCardMessage(title, text, hideAvatar));
+    public OapiRobotSendResponse sendActionCardMessage(String corpId, String robotId, String title, String text, HideAvatarType hideAvatar) throws ApiException {
+        return this.sendMessage(corpId, robotId, new ActionCardMessage(title, text, hideAvatar));
     }
 
     /*
      * 发送ActionCard消息到钉钉
      */
-    public OapiRobotSendResponse sendActionCardMessage(String cropId, String robotId, String title, String text, ActionCardButton button) throws ApiException {
-        return this.sendMessage(cropId, robotId, new ActionCardMessage(title, text, button));
+    public OapiRobotSendResponse sendActionCardMessage(String corpId, String robotId, String title, String text, ActionCardButton button) throws ApiException {
+        return this.sendMessage(corpId, robotId, new ActionCardMessage(title, text, button));
     }
 
     /*
      * 发送ActionCard消息到钉钉
      */
-    public OapiRobotSendResponse sendActionCardMessage(String cropId, String robotId, String title, String text, HideAvatarType hideAvatar, ActionCardButton button) throws ApiException {
-        return this.sendMessage(cropId, robotId, new ActionCardMessage(title, text, hideAvatar, button));
+    public OapiRobotSendResponse sendActionCardMessage(String corpId, String robotId, String title, String text, HideAvatarType hideAvatar, ActionCardButton button) throws ApiException {
+        return this.sendMessage(corpId, robotId, new ActionCardMessage(title, text, hideAvatar, button));
     }
 
     /*
      * 发送FeedCard消息到钉钉
      */
-    public OapiRobotSendResponse sendFeedCardMessage(String cropId, String robotId, FeedCardMessage feedCardMessage) throws ApiException {
-        return this.sendMessage(cropId, robotId, feedCardMessage);
+    public OapiRobotSendResponse sendFeedCardMessage(String corpId, String robotId, FeedCardMessage feedCardMessage) throws ApiException {
+        return this.sendMessage(corpId, robotId, feedCardMessage);
     }
 
     /*
      * 发送FeedCard消息到钉钉
      */
-    public OapiRobotSendResponse sendFeedCardMessage(String cropId, String robotId, List<FeedCardMessageItem> feedCardItems) throws ApiException {
-        return this.sendMessage(cropId, robotId, new FeedCardMessage(feedCardItems));
+    public OapiRobotSendResponse sendFeedCardMessage(String corpId, String robotId, List<FeedCardMessageItem> feedCardItems) throws ApiException {
+        return this.sendMessage(corpId, robotId, new FeedCardMessage(feedCardItems));
     }
 
     public OapiRobotSendResponse sendMessageByUrl(String webhook, String secret, BaseMessage message) throws ApiException {

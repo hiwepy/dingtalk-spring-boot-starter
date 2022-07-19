@@ -27,7 +27,7 @@ dingtalk starter for spring boot
 #################################################################################################
 dingtalk:
   corp-id: 企业ID
-  crop-apps:
+  corp-apps:
   - agent-id: 企业内部开发：程序客户端ID
     app-key: 企业内部开发：应用的唯一标识key
     app-secret: 企业内部开发：应用的密钥
