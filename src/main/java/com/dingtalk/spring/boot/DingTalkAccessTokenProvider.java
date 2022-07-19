@@ -6,7 +6,7 @@ public interface DingTalkAccessTokenProvider {
 
     /**
      * 根据corpId获取企业内部开发access_token
-     * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
+     * https://open.dingtalk.com/document/isvapp-server/obtain-the-access_token-of-an-enterprise-s-internal-applications
      * @param corpId  企业ID
      * @param appKey    企业Id
      * @return the AccessToken

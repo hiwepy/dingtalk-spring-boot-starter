@@ -24,11 +24,8 @@ public class DefaultDingTalkAccessTokenProvider implements DingTalkAccessTokenPr
 
         OapiGettokenRequest request = new OapiGettokenRequest();
 
-        String corpSecret = dingTalkConfigProvider.getCorpSecret(corpId);
         String appSecret = dingTalkConfigProvider.getAppSecret(corpId, appKey);
 
-        request.setCorpid(corpId);
-        request.setCorpsecret(corpSecret);
         request.setAppkey(appKey);
         request.setAppsecret(appSecret);
         request.setHttpMethod(METHOD_GET);
