@@ -55,14 +55,38 @@ public class DingTalkTemplate implements InitializingBean {
 
 	}
 
-	public boolean hasAppKey(String cropId, String appKey) {
-		return dingTalkConfigProvider.hasAppKey(cropId, appKey);
+	public boolean hasAppKey(String appKey) {
+		return dingTalkConfigProvider.hasAppKey(appKey);
 	}
-	
+
+	/**
+	 * 通过应用Key或Id获取corpId
+	 * @param appKey 应用Key或Id
+	 * @return 企业corpId
+	 */
+	public String getCorpId(String appKey){
+		return dingTalkConfigProvider.getCorpId(appKey);
+	}
+
+	/**
+	 * 企业的密钥
+	 * @param cropId  企业ID
+	 * @return 企业的密钥
+	 */
+	public String getCorpSecret(String cropId){
+		return dingTalkConfigProvider.getCorpSecret(cropId);
+	}
+
+	/**
+	 * 应用密钥
+	 * @param cropId  企业ID
+	 * @param appKey 应用Key或Id
+	 * @return 应用密钥
+	 */
 	public String getAppSecret(String cropId, String appKey) {
 		return dingTalkConfigProvider.getAppSecret(cropId, appKey);
-	} 
-	
+	}
+
 	/**
 	 * 企业内部开发获取access_token 先从缓存查，再到钉钉查
 	 * https://open-doc.dingtalk.com/microapp/serverapi2/eev437

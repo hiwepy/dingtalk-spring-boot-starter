@@ -100,8 +100,13 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
-    public boolean hasAppKey(String cropId, String appKey) {
+    public boolean hasAppKey(String appKey) {
         return appKeySecret.containsKey(appKey);
+    }
+
+    @Override
+    public String getCorpId(String appKey) {
+        return dingTalkProperties.getCorpId();
     }
 
     @Override

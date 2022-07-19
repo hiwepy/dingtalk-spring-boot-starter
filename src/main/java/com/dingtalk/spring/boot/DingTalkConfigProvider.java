@@ -51,7 +51,14 @@ public interface DingTalkConfigProvider {
      */
     DingTalkRobotProperties getDingTalkRobotProperties(String cropId, String robotId);
 
-    boolean hasAppKey(String cropId, String appKey);
+    boolean hasAppKey(String appKey);
+
+    /**
+     * 通过应用Key或Id获取corpId
+     * @param appKey 应用Key或Id
+     * @return 企业的corpId
+     */
+    String getCorpId(String appKey);
 
     /**
      * 企业的密钥
