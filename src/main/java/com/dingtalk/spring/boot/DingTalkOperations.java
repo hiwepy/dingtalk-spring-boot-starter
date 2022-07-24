@@ -15,12 +15,10 @@
  */
 package com.dingtalk.spring.boot;
 
-import com.google.common.base.Joiner;
-
 /**
  */
 public abstract class DingTalkOperations {
-	
+
 	public static final String PREFIX = "https://oapi.dingtalk.com";
 	public static final String METHOD_GET = "GET";
 	public static final String APPLICATION_JSON_VALUE = "application/json";
@@ -28,13 +26,11 @@ public abstract class DingTalkOperations {
 
 	public static final String DELIMITER = "&";
 	public static final String SEPARATOR = "=";
-	
-	protected final Joiner.MapJoiner joiner = Joiner.on(DELIMITER).withKeyValueSeparator(SEPARATOR);
- 
+
 	protected DingTalkTemplate template;
 
 	public DingTalkOperations(DingTalkTemplate template) {
 		this.template = template;
 	}
-	
+
 }
