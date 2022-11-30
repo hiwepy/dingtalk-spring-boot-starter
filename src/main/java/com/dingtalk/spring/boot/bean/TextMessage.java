@@ -26,16 +26,6 @@ public class TextMessage extends BaseMessage {
 	 */
 	private String content;
 
-	/**
-	 * 可以通过群成员的绑定手机号来艾特具体的群成员
-	 */
-	private String[] atMobiles;
-
-	/**
-	 * 是否艾特所有人 也可以设置atAll=true来艾特所有人
-	 */
-	private boolean atAll;
-
 	public TextMessage() {
 		super(MessageType.text);
 	}
@@ -45,40 +35,31 @@ public class TextMessage extends BaseMessage {
 		this.content = content;
 	}
 
+	public TextMessage(String content, boolean isAtAll) {
+		super(MessageType.text);
+		super.setIsAtAll(isAtAll);
+		this.content = content;
+	}
+
 	public TextMessage(String content, String[] atMobiles) {
 		super(MessageType.text);
+		super.setAtMobiles(atMobiles);
 		this.content = content;
-		this.atMobiles = atMobiles;
 	}
 
-	public TextMessage(String content, boolean atAll) {
+	public TextMessage(String content, String[] atMobiles, String[] atUserIds) {
 		super(MessageType.text);
+		super.setAtMobiles(atMobiles);
+		super.setAtUserIds(atUserIds);
 		this.content = content;
-		this.atAll = atAll;
-	}
-
-	public String getContent() {
-		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
 	}
 
-	public String[] getAtMobiles() {
-		return atMobiles;
-	}
-
-	public void setAtMobiles(String[] atMobiles) {
-		this.atMobiles = atMobiles;
-	}
-
-	public boolean isAtAll() {
-		return atAll;
-	}
-
-	public void setAtAll(boolean atAll) {
-		this.atAll = atAll;
+	public String getContent() {
+		return content;
 	}
 
 }

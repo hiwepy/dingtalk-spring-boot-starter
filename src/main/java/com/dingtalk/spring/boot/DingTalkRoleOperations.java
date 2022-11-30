@@ -2,8 +2,8 @@ package com.dingtalk.spring.boot;
 
 import com.dingtalk.api.DefaultDingTalkClient;
 import com.dingtalk.api.DingTalkClient;
-import com.dingtalk.api.request.*;
-import com.dingtalk.api.response.*;
+import com.dingtalk.api.request.OapiUserGetuserinfoRequest;
+import com.dingtalk.api.response.OapiUserGetuserinfoResponse;
 import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,25 +23,10 @@ import lombok.extern.slf4j.Slf4j;
  * </ul>
  */
 @Slf4j
-public class DingTalkUserOperations extends DingTalkOperations {
+public class DingTalkRoleOperations extends DingTalkOperations {
 
-	public DingTalkUserOperations(DingTalkTemplate template) {
+	public DingTalkRoleOperations(DingTalkTemplate template) {
 		super(template);
-	}
-
-	public String getUserMobile(String access_token, String userid,  String lang) {
-		try {
-			DingTalkClient client = new DefaultDingTalkClient(PREFIX + "/topapi/v2/user/get");
-			OapiV2UserGetRequest req = new OapiV2UserGetRequest();
-			req.setUserid(userid);
-			req.setLanguage(lang);
-			OapiV2UserGetResponse rsp = client.execute(req, access_token);
-			System.out.println(rsp.getBody());
-			return rsp.getResult().getMobile();
-		} catch (ApiException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	/**

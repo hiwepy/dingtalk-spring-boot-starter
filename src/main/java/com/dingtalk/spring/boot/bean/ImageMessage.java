@@ -16,36 +16,31 @@
 package com.dingtalk.spring.boot.bean;
 
 /**
- * ActionCard消息是否隐藏头像枚举值
+ * 图片消息类型
  */
-public enum HideAvatarType {
+@SuppressWarnings("serial")
+public class ImageMessage extends BaseMessage {
 
     /**
-     * 发消息的时候，隐藏机器人头像
+     * 媒体文件id。引用的媒体文件最大10MB
      */
-    HIDE("隐藏", "1"),
+    private String mediaId;
 
-    /**
-     * 发消息的时候，显示机器人头像
-     */
-    UNHIDE("不隐藏，正常显示", "0");
-
-    private String comment;
-
-    private String value;
-
-    HideAvatarType(String comment, String value) {
-        this.comment = comment;
-        this.value = value;
+    public ImageMessage() {
+        super(MessageType.image);
     }
 
-    public String getComment() {
-        return comment;
+    public ImageMessage(String mediaId) {
+    	super(MessageType.link);
+        this.mediaId = mediaId;
     }
 
-    public String getValue() {
-        return value;
+    public void setMediaId(String mediaId) {
+        this.mediaId = mediaId;
     }
 
+    public String getMediaId() {
+        return mediaId;
+    }
 
 }

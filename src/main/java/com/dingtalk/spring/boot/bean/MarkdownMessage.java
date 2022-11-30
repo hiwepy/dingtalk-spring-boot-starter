@@ -16,7 +16,7 @@
 package com.dingtalk.spring.boot.bean;
 
 /**
- * 文本请求消息
+ * Markdown请求消息
  */
 @SuppressWarnings("serial")
 public class MarkdownMessage extends BaseMessage {
@@ -31,71 +31,44 @@ public class MarkdownMessage extends BaseMessage {
      */
     private String title;
 
-    /**
-     * 可以通过群成员的绑定手机号来艾特具体的群成员
-     */
-    private String[] atMobiles;
-
-    /**
-     * 是否艾特所有人
-     * 也可以设置isAtAll=true来艾特所有人
-     */
-    private boolean isAtAll;
-
 	public MarkdownMessage() {
 		super(MessageType.markdown);
 	}
 
 	public MarkdownMessage(String title, String text) {
 		super(MessageType.markdown);
-		this.text = text;
 		this.title = title;
-	}
-
-	public MarkdownMessage(String title, String text, String[] atMobiles) {
-		super(MessageType.markdown);
 		this.text = text;
-		this.title = title;
-		this.atMobiles = atMobiles;
 	}
 
 	public MarkdownMessage(String title, String text, boolean isAtAll) {
 		super(MessageType.markdown);
-		this.text = text;
+		super.setIsAtAll(isAtAll);
 		this.title = title;
-		this.isAtAll = isAtAll;
+		this.text = text;
 	}
 
-	public String getTitle() {
-		return title;
+	public MarkdownMessage(String title, String text, String[] atMobiles) {
+		super(MessageType.markdown);
+		super.setAtMobiles(atMobiles);
+		this.title = title;
+		this.text = text;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public String getText() {
-		return text;
+	public String getTitle() {
+		return title;
 	}
 
 	public void setText(String text) {
 		this.text = text;
 	}
 
-	public String[] getAtMobiles() {
-		return atMobiles;
-	}
-
-	public void setAtMobiles(String[] atMobiles) {
-		this.atMobiles = atMobiles;
-	}
-
-	public boolean getIsAtAll() {
-		return isAtAll;
-	}
-
-	public void setIsAtAll(boolean isAtAll) {
-		this.isAtAll = isAtAll;
+	public String getText() {
+		return text;
 	}
 
 }

@@ -22,14 +22,14 @@ package com.dingtalk.spring.boot.bean;
 public class LinkMessage extends BaseMessage {
 
     /**
-     * 消息简介
-     */
-    private String text;
-
-    /**
      * 消息标题
      */
     private String title;
+
+    /**
+     * 消息简介
+     */
+    private String text;
 
     /**
      * 封面图片URL
@@ -42,13 +42,13 @@ public class LinkMessage extends BaseMessage {
     private String messageUrl;
 
     public LinkMessage() {
-    	super(MessageType.link);
+        super(MessageType.link);
     }
 
     public LinkMessage(String title, String text, String messageUrl) {
     	super(MessageType.link);
-        this.text = text;
         this.title = title;
+        this.text = text;
         this.messageUrl = messageUrl;
     }
 
@@ -56,8 +56,8 @@ public class LinkMessage extends BaseMessage {
     	super(MessageType.link);
         this.text = text;
         this.title = title;
-        this.picUrl = picUrl;
         this.messageUrl = messageUrl;
+        this.picUrl = picUrl;
     }
 
     public String getText() {
