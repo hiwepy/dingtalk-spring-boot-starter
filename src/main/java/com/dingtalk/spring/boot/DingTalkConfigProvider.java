@@ -2,8 +2,6 @@ package com.dingtalk.spring.boot;
 
 import com.dingtalk.spring.boot.property.*;
 
-import java.util.Optional;
-
 public interface DingTalkConfigProvider {
 
     /**
@@ -11,7 +9,7 @@ public interface DingTalkConfigProvider {
      * @param corpId  企业ID
      * @return
      */
-    Optional<DingTalkProperties> getDingTalkProperties(String corpId);
+    DingTalkProperties getDingTalkProperties(String corpId);
 
     /**
      * 根据corpId、agentId 获取企业内部开发：小程序、H5配置
@@ -19,7 +17,7 @@ public interface DingTalkConfigProvider {
      * @param agentId 程序客户端ID
      * @return
      */
-    Optional<DingTalkCorpAppProperties> getDingTalkCorpAppProperties(String corpId, String agentId);
+    DingTalkCorpAppProperties getDingTalkCorpAppProperties(String corpId, String agentId);
 
     /**
      * 根据 corpId、appId 获取第三方个人应用：小程序配置
@@ -27,7 +25,7 @@ public interface DingTalkConfigProvider {
      * @param appId   应用Id
      * @return
      */
-    Optional<DingTalkPersonalMiniAppProperties> getDingTalkPersonalMiniAppProperties(String corpId, String appId);
+    DingTalkPersonalMiniAppProperties getDingTalkPersonalMiniAppProperties(String corpId, String appId);
 
     /**
      * 根据 corpId、suiteId 获取第三方企业应用：小程序、H5配置
@@ -35,7 +33,7 @@ public interface DingTalkConfigProvider {
      * @param suiteId 程序客户端ID
      * @return
      */
-    Optional<DingTalkSuiteProperties> getDingTalkSuiteProperties(String corpId, String suiteId);
+    DingTalkSuiteProperties getDingTalkSuiteProperties(String corpId, String suiteId);
 
     /**
      * 根据 corpId、appId 获取钉钉扫码登录配置
@@ -43,7 +41,7 @@ public interface DingTalkConfigProvider {
      * @param appId   应用Id
      * @return
      */
-    Optional<DingTalkLoginProperties> getDingTalkLoginProperties(String corpId, String appId);
+    DingTalkLoginProperties getDingTalkLoginProperties(String corpId, String appId);
 
     /**
      * 根据 corpId、appId 获取钉钉机器人配置
@@ -51,7 +49,7 @@ public interface DingTalkConfigProvider {
      * @param robotId 机器人ID
      * @return
      */
-    Optional<DingTalkRobotProperties> getDingTalkRobotProperties(String corpId, String robotId);
+    DingTalkRobotProperties getDingTalkRobotProperties(String corpId, String robotId);
 
     boolean hasAppKey(String appKey);
 

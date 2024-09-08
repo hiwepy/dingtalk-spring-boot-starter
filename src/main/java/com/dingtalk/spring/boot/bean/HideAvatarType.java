@@ -29,7 +29,6 @@ public enum HideAvatarType {
      * 发消息的时候，显示机器人头像
      */
     UNHIDE("不隐藏，正常显示", "0");
-
     private String comment;
 
     private String value;

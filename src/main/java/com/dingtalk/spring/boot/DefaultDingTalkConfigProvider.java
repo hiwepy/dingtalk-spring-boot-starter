@@ -45,53 +45,58 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
-    public Optional<DingTalkProperties> getDingTalkProperties(String corpId) {
-        return Optional.ofNullable(dingTalkProperties);
+    public DingTalkProperties getDingTalkProperties(String corpId) {
+        return dingTalkProperties;
     }
 
     @Override
-    public Optional<DingTalkCorpAppProperties> getDingTalkCorpAppProperties(String corpId, String agentId) {
+    public DingTalkCorpAppProperties getDingTalkCorpAppProperties(String corpId, String agentId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getCorpApps())){
-            return Optional.empty();
+            return null;
         }
-        return dingTalkProperties.getCorpApps().stream()
+        Optional<DingTalkCorpAppProperties> optional = dingTalkProperties.getCorpApps().stream()
                 .filter(item -> StringUtils.equals(item.getAgentId(), agentId)).findFirst();
+        return optional.isPresent() ? optional.get() : null;
     }
 
     @Override
-    public Optional<DingTalkPersonalMiniAppProperties> getDingTalkPersonalMiniAppProperties(String corpId, String appId) {
+    public DingTalkPersonalMiniAppProperties getDingTalkPersonalMiniAppProperties(String corpId, String appId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getApps())){
-            return Optional.empty();
+            return null;
         }
-        return dingTalkProperties.getApps().stream()
+        Optional<DingTalkPersonalMiniAppProperties> optional = dingTalkProperties.getApps().stream()
                 .filter(item -> StringUtils.equals(item.getAppId(), appId)).findFirst();
+        return optional.isPresent() ? optional.get() : null;
     }
 
     @Override
-    public Optional<DingTalkSuiteProperties> getDingTalkSuiteProperties(String corpId, String suiteId) {
+    public DingTalkSuiteProperties getDingTalkSuiteProperties(String corpId, String suiteId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getSuites())){
-            return Optional.empty();
+            return null;
         }
-        return dingTalkProperties.getSuites().stream()
+        Optional<DingTalkSuiteProperties> optional = dingTalkProperties.getSuites().stream()
                 .filter(item -> StringUtils.equals(item.getSuiteId(), suiteId)).findFirst();
+        return optional.isPresent() ? optional.get() : null;
     }
 
     @Override
-    public Optional<DingTalkLoginProperties> getDingTalkLoginProperties(String corpId, String appId) {
+    public DingTalkLoginProperties getDingTalkLoginProperties(String corpId, String appId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getLogins())){
-            return Optional.empty();
+            return null;
         }
-        return dingTalkProperties.getLogins().stream()
+        Optional<DingTalkLoginProperties> optional = dingTalkProperties.getLogins().stream()
                 .filter(item -> StringUtils.equals(item.getAppId(), appId)).findFirst();
+        return optional.isPresent() ? optional.get() : null;
     }
 
     @Override
-    public Optional<DingTalkRobotProperties> getDingTalkRobotProperties(String corpId, String robotId) {
+    public DingTalkRobotProperties getDingTalkRobotProperties(String corpId, String robotId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getRobots())){
-            return Optional.empty();
+            return null;
         }
-        return dingTalkProperties.getRobots().stream()
+        Optional<DingTalkRobotProperties> optional = dingTalkProperties.getRobots().stream()
                 .filter(item -> StringUtils.equals(item.getRobotId(), robotId)).findFirst();
+        return optional.isPresent() ? optional.get() : null;
     }
 
     @Override

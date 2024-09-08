@@ -44,7 +44,6 @@ public class DingTalkTemplate implements InitializingBean {
 	private final DingTalkJsapiOperations jsapiOps = new DingTalkJsapiOperations(this);
 	private final DingTalkRobotOperations robotOps = new DingTalkRobotOperations(this);
 	private final DingTalkUserOperations userOps = new DingTalkUserOperations(this);
-	private final DingTalkMessageNotificationOperations msgNotificationOps = new DingTalkMessageNotificationOperations(this);
 
 	public DingTalkTemplate(DingTalkConfigProvider dingTalkConfigProvider, DingTalkAccessTokenProvider dingTalkAccessTokenProvider) {
 		this.dingTalkConfigProvider = dingTalkConfigProvider;
@@ -156,10 +155,6 @@ public class DingTalkTemplate implements InitializingBean {
 
 	public DingTalkUserOperations opsForUser() {
 		return userOps;
-	}
-
-	public DingTalkMessageNotificationOperations opsForMsgNotification() {
-		return msgNotificationOps;
 	}
 
 	public DingTalkAccessTokenProvider getDingTalkAccessTokenProvider() {

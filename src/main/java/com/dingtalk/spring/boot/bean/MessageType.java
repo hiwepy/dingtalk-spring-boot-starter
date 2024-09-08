@@ -26,16 +26,6 @@ public enum MessageType {
     text,
 
     /**
-     * 图片类型
-     */
-    image,
-
-    /**
-     * 语言类型
-     */
-    voice,
-
-    /**
      * 链接类型
      */
     link,

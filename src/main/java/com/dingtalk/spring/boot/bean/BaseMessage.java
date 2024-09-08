@@ -27,18 +27,6 @@ public abstract class BaseMessage implements Serializable {
      * 消息类型
      */
     protected MessageType msgtype;
-	/**
-	 * 被@人的手机号
-	 */
-	private String[] atMobiles;
-	/**
-	 * 被@人的工号
-	 */
-	private String[] atUserIds;
-	/**
-	 * @所有人时:true,否则为:false
-	 */
-	private boolean isAtAll;
 
 	public BaseMessage(MessageType msgtype) {
 		super();
@@ -49,28 +37,8 @@ public abstract class BaseMessage implements Serializable {
 		return msgtype;
 	}
 
-	public void setAtMobiles(String[] atMobiles) {
-		this.atMobiles = atMobiles;
+	public void setMsgtype(MessageType msgtype) {
+		this.msgtype = msgtype;
 	}
-
-	public String[] getAtMobiles() {
-		return atMobiles;
-	}
-
-	public void setAtUserIds(String[] atUserIds) {
-		this.atUserIds = atUserIds;
-	}
-
-	public String[] getAtUserIds() {
-		return atUserIds;
-	}
-
-	public void setIsAtAll(boolean atAll) {
-		this.isAtAll = atAll;
-	}
-
-	public boolean isAtAll() {
-		return isAtAll;
-	}
-
+	
 }

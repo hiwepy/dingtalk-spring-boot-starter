@@ -29,21 +29,6 @@ public class DingTalkUserOperations extends DingTalkOperations {
 		super(template);
 	}
 
-	public String getUserMobile(String access_token, String userid,  String lang) {
-		try {
-			DingTalkClient client = new DefaultDingTalkClient(PREFIX + "/topapi/v2/user/get");
-			OapiV2UserGetRequest req = new OapiV2UserGetRequest();
-			req.setUserid(userid);
-			req.setLanguage(lang);
-			OapiV2UserGetResponse rsp = client.execute(req, access_token);
-			System.out.println(rsp.getBody());
-			return rsp.getResult().getMobile();
-		} catch (ApiException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 	/**
 	 * @param code 	code
 	 * @param accessToken 	应用的accessToken

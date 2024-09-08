@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 卡片消息
+ * 跳转卡片类型
  */
 @SuppressWarnings("serial")
 public class ActionCardMessage extends BaseMessage {
