@@ -421,6 +421,7 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <maven-nexus-staging-plugin.version>1.6.8</maven-nexus-staging-plugin.version>
+                <dingtalk-sdk.version>2.2.55</dingtalk-sdk.version>
     </properties>
     
     <dependencyManagement>
@@ -441,7 +442,13 @@
                 <version>${fastjson.version}</version>
             </dependency>
             
-        </dependencies>
+                <dependency>
+            <groupId>com.dingtalk</groupId>
+            <artifactId>dingtalk-sdk</artifactId>
+            <version>${dingtalk-sdk.version}</version>
+            <scope>provided</scope>
+        </dependency>
+</dependencies>
     </dependencyManagement>
     
     <dependencies>
@@ -535,7 +542,7 @@
         <dependency>
             <groupId>com.dingtalk</groupId>
             <artifactId>dingtalk-sdk</artifactId>
-            <version>20190704</version>
+            <version>${dingtalk-sdk.version}</version>
             <scope>provided</scope>
         </dependency>
         
