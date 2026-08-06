@@ -13,27 +13,24 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.dingtalk.spring.boot.cache;
+package com.dingtalk.spring.boot;
 
-public interface LocalCache<K, V> {
-	
-	/*
-	 * Returns the value associated with {@code key} in this cache, or {@code null}
-	 * if there is no cached value for {@code key}.
-	 **/
-	V get(K key) throws Exception;
+/**
+ */
+public abstract class DingTalkOperations {
 
-	/*
-	 * Associates {@code value} with {@code key} in this cache. If the cache
-	 * previously contained a value associated with {@code key}, the old value is
-	 * replaced by {@code value}.
-	 *
-	 **/
-	void put(K key, V value);
+	public static final String PREFIX = "https://oapi.dingtalk.com";
+	public static final String METHOD_GET = "GET";
+	public static final String APPLICATION_JSON_VALUE = "application/json";
+	public static final String APPLICATION_JSON_UTF8_VALUE = "application/json;charset=UTF-8";
 
-	/*
-	 * Discards any cached value for key {@code key}.
-	 */
-	void remove(Object key);
-	
+	public static final String DELIMITER = "&";
+	public static final String SEPARATOR = "=";
+
+	protected DingTalkTemplate template;
+
+	public DingTalkOperations(DingTalkTemplate template) {
+		this.template = template;
+	}
+
 }

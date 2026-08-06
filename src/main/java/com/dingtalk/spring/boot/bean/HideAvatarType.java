@@ -13,27 +13,38 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.dingtalk.spring.boot.cache;
+package com.dingtalk.spring.boot.bean;
 
-public interface LocalCache<K, V> {
-	
-	/*
-	 * Returns the value associated with {@code key} in this cache, or {@code null}
-	 * if there is no cached value for {@code key}.
-	 **/
-	V get(K key) throws Exception;
+/**
+ * ActionCard消息是否隐藏头像枚举值
+ */
+public enum HideAvatarType {
 
-	/*
-	 * Associates {@code value} with {@code key} in this cache. If the cache
-	 * previously contained a value associated with {@code key}, the old value is
-	 * replaced by {@code value}.
-	 *
-	 **/
-	void put(K key, V value);
+    /**
+     * 发消息的时候，隐藏机器人头像
+     */
+    HIDE("隐藏", "1"),
 
-	/*
-	 * Discards any cached value for key {@code key}.
-	 */
-	void remove(Object key);
-	
+    /**
+     * 发消息的时候，显示机器人头像
+     */
+    UNHIDE("不隐藏，正常显示", "0");
+    private String comment;
+
+    private String value;
+
+    HideAvatarType(String comment, String value) {
+        this.comment = comment;
+        this.value = value;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+
 }

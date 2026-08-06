@@ -13,27 +13,36 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.dingtalk.spring.boot.cache;
+package com.dingtalk.spring.boot.bean;
 
-public interface LocalCache<K, V> {
-	
-	/*
-	 * Returns the value associated with {@code key} in this cache, or {@code null}
-	 * if there is no cached value for {@code key}.
-	 **/
-	V get(K key) throws Exception;
 
-	/*
-	 * Associates {@code value} with {@code key} in this cache. If the cache
-	 * previously contained a value associated with {@code key}, the old value is
-	 * replaced by {@code value}.
-	 *
-	 **/
-	void put(K key, V value);
+/**
+ * ActionCard消息按钮布局枚举值
+ */
+public enum ButtonOrientationType {
+    /**
+     * 水平布局
+     */
+    HORIZONTAL("水平布局", "1"),
+    /**
+     * 垂直布局
+     */
+    VERTICAL("垂直布局", "0");
 
-	/*
-	 * Discards any cached value for key {@code key}.
-	 */
-	void remove(Object key);
-	
+    private String comment;
+
+    private String value;
+
+    ButtonOrientationType(String comment, String value) {
+        this.comment = comment;
+        this.value = value;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public String getValue() {
+        return value;
+    }
 }

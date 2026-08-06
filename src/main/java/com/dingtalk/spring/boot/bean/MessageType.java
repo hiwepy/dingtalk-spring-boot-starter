@@ -13,27 +13,35 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package com.dingtalk.spring.boot.cache;
+package com.dingtalk.spring.boot.bean;
 
-public interface LocalCache<K, V> {
-	
-	/*
-	 * Returns the value associated with {@code key} in this cache, or {@code null}
-	 * if there is no cached value for {@code key}.
-	 **/
-	V get(K key) throws Exception;
+/**
+ * 定义消息类型，目前有文本、链接、MarkDown、跳转卡片、消息卡片五种枚举值
+ */
+public enum MessageType {
 
-	/*
-	 * Associates {@code value} with {@code key} in this cache. If the cache
-	 * previously contained a value associated with {@code key}, the old value is
-	 * replaced by {@code value}.
-	 *
-	 **/
-	void put(K key, V value);
+    /**
+     * 文本类型
+     */
+    text,
 
-	/*
-	 * Discards any cached value for key {@code key}.
-	 */
-	void remove(Object key);
-	
+    /**
+     * 链接类型
+     */
+    link,
+
+    /**
+     * MarkDown类型
+     */
+    markdown,
+
+    /**
+     * 跳转卡片类型
+     */
+    actionCard,
+
+    /**
+     * 消息卡片类型
+     */
+    feedCard;
 }
