@@ -6,7 +6,7 @@ import lombok.ToString;
 
 /**
  *	第三方个人应用：小程序配置
- * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @Getter
 @Setter

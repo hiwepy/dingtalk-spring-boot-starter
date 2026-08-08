@@ -6,7 +6,7 @@ import lombok.ToString;
 
 /**
  * 	移动接入应用：扫码登录配置
- * @author 		： <a href="https://github.com/hiwepy">wandl</a>
+ * @author [@Loong Wan](https://github.com/loong10k)
  */
 @Getter
 @Setter
