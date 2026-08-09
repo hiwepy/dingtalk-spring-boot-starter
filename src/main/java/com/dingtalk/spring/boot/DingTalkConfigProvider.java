@@ -2,71 +2,99 @@ package com.dingtalk.spring.boot;
 
 import com.dingtalk.spring.boot.property.*;
 
+/**
+ * Provider interface for accessing DingTalk configuration properties for various application types
+ * including enterprise internal apps, personal mini apps, suites, login apps, and robots.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public interface DingTalkConfigProvider {
 
     /**
-     * 根据corpId获取所有的钉钉配置
-     * @param corpId  企业ID
-     * @return
+     * Retrieves all DingTalk configuration properties for the given enterprise.
+     *
+     * @param corpId  the enterprise ID
+     * @return the DingTalk properties
      */
     DingTalkProperties getDingTalkProperties(String corpId);
 
     /**
-     * 根据corpId、agentId 获取企业内部开发：小程序、H5配置
-     * @param corpId  企业ID
-     * @param agentId 程序客户端ID
-     * @return
+     * Retrieves the enterprise internal application (mini app or H5) configuration.
+     *
+     * @param corpId  the enterprise ID
+     * @param agentId the application agent ID
+     * @return the enterprise app properties, or null if not found
      */
     DingTalkCorpAppProperties getDingTalkCorpAppProperties(String corpId, String agentId);
 
     /**
-     * 根据 corpId、appId 获取第三方个人应用：小程序配置
-     * @param corpId  企业ID
-     * @param appId   应用Id
-     * @return
+     * Retrieves the third-party personal mini app configuration.
+     *
+     * @param corpId  the enterprise ID
+     * @param appId   the application ID
+     * @return the personal mini app properties, or null if not found
      */
     DingTalkPersonalMiniAppProperties getDingTalkPersonalMiniAppProperties(String corpId, String appId);
 
     /**
-     * 根据 corpId、suiteId 获取第三方企业应用：小程序、H5配置
-     * @param corpId  企业ID
-     * @param suiteId 程序客户端ID
-     * @return
+     * Retrieves the third-party enterprise application (mini app or H5) configuration.
+     *
+     * @param corpId  the enterprise ID
+     * @param suiteId the suite ID
+     * @return the suite properties, or null if not found
      */
     DingTalkSuiteProperties getDingTalkSuiteProperties(String corpId, String suiteId);
 
     /**
-     * 根据 corpId、appId 获取钉钉扫码登录配置
-     * @param corpId  企业ID
-     * @param appId   应用Id
-     * @return
+     * Retrieves the DingTalk scan-to-login configuration.
+     *
+     * @param corpId  the enterprise ID
+     * @param appId   the application ID
+     * @return the login properties, or null if not found
      */
     DingTalkLoginProperties getDingTalkLoginProperties(String corpId, String appId);
 
     /**
-     * 根据 corpId、appId 获取钉钉机器人配置
-     * @param corpId  企业ID
-     * @param robotId 机器人ID
-     * @return
+     * Retrieves the DingTalk robot configuration.
+     *
+     * @param corpId  the enterprise ID
+     * @param robotId the robot ID
+     * @return the robot properties, or null if not found
      */
     DingTalkRobotProperties getDingTalkRobotProperties(String corpId, String robotId);
 
+    /**
+     * Checks whether the given app key is registered in the configuration.
+     *
+     * @param appKey the application key or ID
+     * @return true if the app key exists
+     */
     boolean hasAppKey(String appKey);
 
     /**
-     * 通过应用Key或Id获取corpId
-     * @param appKey 应用Key或Id
-     * @return 企业的corpId
+     * Retrieves the enterprise ID (corpId) for the given application key.
+     *
+     * @param appKey the application key or ID
+     * @return the enterprise corpId
      */
     String getCorpId(String appKey);
 
     /**
-     * 企业的密钥
-     * @param corpId  企业ID
-     * @return 企业的密钥
+     * Retrieves the enterprise secret for the given enterprise ID.
+     *
+     * @param corpId  the enterprise ID
+     * @return the enterprise secret
      */
     String getCorpSecret(String corpId);
 
+    /**
+     * Retrieves the application secret for the given enterprise and application key.
+     *
+     * @param corpId  the enterprise ID
+     * @param appKey  the application key
+     * @return the application secret
+     */
     String getAppSecret(String corpId, String appKey);
 
 }

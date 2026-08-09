@@ -16,12 +16,23 @@
 package com.dingtalk.spring.boot.utils;
 
 
+/**
+ * Utility class for generating random strings used in DingTalk signature computation.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class RandomUtils {
 
   private static final String RANDOM_STR = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
   private static final java.util.Random RANDOM = new java.util.Random();
 
+  /**
+   * Generates a random 16-character alphanumeric string.
+   *
+   * @return the random string
+   */
   public static String getRandomStr() {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < 16; i++) {

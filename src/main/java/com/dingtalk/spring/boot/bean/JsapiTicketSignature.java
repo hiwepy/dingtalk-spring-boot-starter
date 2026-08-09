@@ -22,6 +22,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Represents the signature data required for DingTalk JSAPI calls, including agent ID,
+ * URL, nonce string, timestamp, enterprise ID, and the computed signature.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -30,29 +37,17 @@ public class JsapiTicketSignature implements Serializable {
 
 	private static final long serialVersionUID = 7442708886169868689L;
 	
-	/**
-	 * 应用的标识
-	 */
+	/** The application agent ID. */
 	private String agentId;
-	/**
-	 * 当前网页的URL，不包含#及其后面部分
-	 */
+	/** The current page URL, excluding the hash fragment. */
 	private String url;
-	/**
-	 * 随机串，自己定义
-	 */
+	/** A random nonce string. */
 	private String nonceStr;
-	/**
-	 * 时间戳：当前时间，但是前端和服务端进行校验时候的值要一致
-	 */
+	/** The timestamp used for signature computation, must match between client and server. */
 	private long timestamp;
-	/**
-	 * 企业ID，在开发者后台中企业视图下开发者账号设置里面可以看到
-	 */
+	/** The enterprise ID. */
 	private String corpId;
-	/**
-	 * 签名信息
-	 */
+	/** The computed signature string. */
 	private String signature;
 
 }

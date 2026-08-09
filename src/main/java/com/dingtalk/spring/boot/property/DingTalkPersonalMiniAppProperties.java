@@ -5,21 +5,19 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- *	第三方个人应用：小程序配置
+ * Configuration properties for DingTalk third-party personal mini applications.
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @Getter
 @Setter
 @ToString
 public class DingTalkPersonalMiniAppProperties {
 
-	/**
-	 * 	AppId：每一个个人应用都会分配一个AppId，该AppId是个人应用开发过程中的唯一性标识，用来获取登录用户授权的access_token
-	 */
+	/** The unique application ID used to obtain the user-authorized access token. */
 	private String appId;
-	/**
-	 * 	AppSecret：每一个个人应用都会分配一个AppSecret，AppSecret可用来获取登录用户授权的access_token
-	 */
+	/** The application secret used to obtain the user-authorized access token. */
 	private String appSecret;
 
 }

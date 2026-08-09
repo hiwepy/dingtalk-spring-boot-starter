@@ -28,10 +28,13 @@ import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 企业内部应用免登
- * https://ding-doc.dingtalk.com/doc#/serverapi2/clotub
- * 用户管理
- * https://ding-doc.dingtalk.com/doc#/serverapi2/ege851
+ * Operations for DingTalk enterprise internal application login (free login) and user management.
+ * Provides methods to retrieve user information by authorization code, union ID, or user ID.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ * @see <a href="https://ding-doc.dingtalk.com/doc#/serverapi2/clotub">Enterprise Internal Application Free Login</a>
+ * @see <a href="https://ding-doc.dingtalk.com/doc#/serverapi2/ege851">User Management</a>
  */
 @Slf4j
 public class DingTalkAccountOperations extends DingTalkOperations {
@@ -41,13 +44,13 @@ public class DingTalkAccountOperations extends DingTalkOperations {
 	}
 
 	/**
-	 * 1、企业内部应用免登录：通过免登授权码和access_token获取用户信息
-	 * https://ding-doc.dingtalk.com/doc#/serverapi2/clotub
-	 * 
-	 * @param code    		免登授权码，参考上述“获取免登授权码”
-	 * @param accessToken 	调用接口凭证
-	 * @return the OapiUserGetuserinfoResponse
-	 * @throws ApiException if Api request Exception
+	 * Retrieves user information by the free-login authorization code and access token
+	 * for enterprise internal applications.
+	 *
+	 * @param code          the free-login authorization code
+	 * @param accessToken   the API access token
+	 * @return the user information response
+	 * @throws ApiException if the API request fails
 	 */
 	public OapiUserGetuserinfoResponse getUserinfoBycode( String code, String accessToken) throws ApiException {
 		DingTalkClient client = new DefaultDingTalkClient(PREFIX + "/user/getuserinfo");
@@ -59,13 +62,12 @@ public class DingTalkAccountOperations extends DingTalkOperations {
 	
 	
 	/**
-	 * 根据unionid获取userid
-	 * https://open-doc.dingtalk.com/microapp/serverapi2/ege851#-5
-	 * 
-	 * @param unionid 员工在当前企业内的唯一标识，也称staffId。可由企业在创建时指定，并代表一定含义比如工号，创建后不可修改，企业内必须唯一。长度为1~64个字符，如果不传，服务器将自动生成一个userid。
-	 * @param accessToken 	调用接口凭证
-	 * @return the OapiUserGetUseridByUnionidResponse
-	 * @throws ApiException if Api request Exception 
+	 * Retrieves the DingTalk user ID by the given union ID.
+	 *
+	 * @param unionid       the union ID of the user
+	 * @param accessToken   the API access token
+	 * @return the response containing the user ID
+	 * @throws ApiException if the API request fails
 	 */
 	public OapiUserGetUseridByUnionidResponse getUseridByUnionid( String unionid, String accessToken) throws ApiException {
 		
@@ -77,13 +79,14 @@ public class DingTalkAccountOperations extends DingTalkOperations {
 		return client.execute(request, accessToken);
 	}
 	
-	/*
-	 * 根据钉钉的userid拿取用户的详细信息(包括手机号，部门id，等)
-	 * https://open-doc.dingtalk.com/microapp/serverapi2/ege851
-	 * @param userid 用户ID
-	 * @param accessToken 	调用接口凭证
-	 * @return the OapiUserGetResponse
-	 * @throws ApiException if Api request Exception 
+	/**
+	 * Retrieves detailed user information (including phone number, department ID, etc.)
+	 * by the DingTalk user ID.
+	 *
+	 * @param userid        the DingTalk user ID
+	 * @param accessToken   the API access token
+	 * @return the user detail response
+	 * @throws ApiException if the API request fails
 	 */
 	public OapiUserGetResponse getUserByUserid( String userid, String accessToken) throws ApiException {
 		

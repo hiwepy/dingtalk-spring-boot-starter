@@ -23,12 +23,24 @@ import java.util.Formatter;
 import com.taobao.api.ApiException;
 
 /**
- * https://ding-doc.dingtalk.com/doc#/dev/uwa7vs
- * 
+ * Utility class for DingTalk JSAPI signature computation using SHA-1 hashing.
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ * @see <a href="https://ding-doc.dingtalk.com/doc#/dev/uwa7vs">JSAPI Signature Documentation</a>
  */
 public class DingTalkUtils {
 
+	/**
+	 * Computes the SHA-1 signature for a DingTalk JSAPI call.
+	 *
+	 * @param jsapiTicket the JSAPI ticket
+	 * @param nonceStr    a random nonce string
+	 * @param timeStamp   the current timestamp in seconds
+	 * @param url         the current page URL
+	 * @return the hex-encoded SHA-1 signature
+	 * @throws ApiException if the signing algorithm is unavailable or encoding fails
+	 */
 	public static String sign(String jsapiTicket, String nonceStr, long timeStamp, String url) throws ApiException {
 		String plain = "jsapi_ticket=" + jsapiTicket + "&noncestr=" + nonceStr + "&timestamp=" + String.valueOf(timeStamp)
 				+ "&url=" + url;

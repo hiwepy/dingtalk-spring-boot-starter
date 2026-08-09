@@ -5,28 +5,21 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Dingding机器人配置
- * 
+ * Configuration properties for DingTalk robots, including webhook access token and signing secret.
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @Getter
 @Setter
 @ToString
 public class DingTalkRobotProperties {
 
-	/**
-	 * 钉钉机器人ID
-	 */
+	/** The DingTalk robot ID. */
 	private String robotId;
-	
-	/**
-	 * 钉钉机器人WebHook地址的access_token
-	 */
+	/** The access token from the robot webhook URL. */
 	private String accessToken;
-
-	/**
-	 * 钉钉机器人WebHook地址的secret_token,群机器人加签用
-	 */
+	/** The secret token for robot webhook signing. */
 	private String secretToken;
 
 }

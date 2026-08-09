@@ -16,23 +16,18 @@
 package com.dingtalk.spring.boot.bean;
 
 /**
- * 消息卡片中的明细条目
+ * Represents an individual item in a DingTalk feed card message.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public class FeedCardMessageItem {
 
-    /**
-     * 标题
-     */
+    /** The item title. */
     private String title;
-
-    /**
-     * 消息跳转URL
-     */
+    /** The URL to navigate to when the item is clicked. */
     private String messageURL;
-
-    /**
-     * 封面图片URL
-     */
+    /** The cover image URL for the item. */
     private String picURL;
 
     public FeedCardMessageItem() {

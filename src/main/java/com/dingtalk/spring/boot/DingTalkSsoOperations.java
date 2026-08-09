@@ -11,8 +11,11 @@ import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 应用管理后台免登
- * https://ding-doc.dingtalk.com/doc#/serverapi2/xswxhg
+ * Operations for DingTalk application management backend SSO (single sign-on) free login.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ * @see <a href="https://ding-doc.dingtalk.com/doc#/serverapi2/xswxhg">Application Management Backend Free Login</a>
  */
 @Slf4j
 public class DingTalkSsoOperations extends DingTalkOperations {
@@ -22,13 +25,14 @@ public class DingTalkSsoOperations extends DingTalkOperations {
 	}
 	
 	/**
-	 * 第三方应用钉钉扫码登录：通过临时授权码Code获取用户信息，临时授权码只能使用一次。
-	 * https://open-doc.dingtalk.com/microapp/serverapi2/kymkv6
-	 * @param tmp_auth_code 用户授权的临时授权码code，只能使用一次；在前面步骤中跳转到redirect_uri时会追加code参数
-	 * @param accessKey 	应用的appId
-	 * @param accessSecret 	应用的secret
-	 * @return the OapiUserGetuserinfoResponse
-	 * @throws ApiException if Api request Exception 
+	 * Retrieves user information by a temporary authorization code for SSO free login.
+	 * The temporary code can only be used once.
+	 *
+	 * @param tmp_auth_code the temporary authorization code
+	 * @param accessKey     the application ID
+	 * @param accessSecret  the application secret
+	 * @return the user information response
+	 * @throws ApiException if the API request fails
 	 */
 	public OapiSnsGetuserinfoBycodeResponse getUserinfoByTmpCode( String tmp_auth_code, String accessKey, String accessSecret) throws ApiException {
 		DingTalkClient client = new DefaultDingTalkClient(PREFIX + "/sns/getuserinfo_bycode");
@@ -38,11 +42,12 @@ public class DingTalkSsoOperations extends DingTalkOperations {
 	}
 
 	/**
-	 * 获取用户授权的持久授权码
-	 * @param tmp_auth_code 用户授权的临时授权码code，只能使用一次；在前面步骤中跳转到redirect_uri时会追加code参数
-	 * @param accessToken  开放应用的token
-	 * @return 响应信息
-	 * @throws ApiException if Api request Exception 
+	 * Retrieves the persistent authorization code from a temporary authorization code.
+	 *
+	 * @param tmp_auth_code the temporary authorization code
+	 * @param accessToken   the open application access token
+	 * @return the response body containing the persistent code
+	 * @throws ApiException if the API request fails
 	 */
 	public String getPersistentCode(String tmp_auth_code, String accessToken) throws ApiException  {
 		DingTalkClient client = new DefaultDingTalkClient(PREFIX + "/sns/get_persistent_code");

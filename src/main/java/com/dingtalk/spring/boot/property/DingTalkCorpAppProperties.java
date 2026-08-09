@@ -5,25 +5,21 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- *	 企业内部开发：小程序、H5配置
+ * Configuration properties for DingTalk enterprise internal applications (mini apps, H5).
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @Getter
 @Setter
 @ToString
 public class DingTalkCorpAppProperties {
 
-	/**
-	 * 	企业内部开发：程序客户端ID
-	 */
+	/** The application agent ID. */
 	private String agentId;
-	/**
-	 * 	企业内部开发：应用的唯一标识key
-	 */
+	/** The unique application key. */
 	private String appKey;
-	/**
-	 * 	企业内部开发：应用的密钥
-	 */
+	/** The application secret. */
 	private String appSecret;
 
 }

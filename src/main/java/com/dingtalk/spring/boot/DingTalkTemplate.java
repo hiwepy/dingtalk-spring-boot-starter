@@ -26,11 +26,13 @@ import com.taobao.api.ApiException;
 
 import lombok.extern.slf4j.Slf4j;
 
-/*
- * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
- * https://blog.csdn.net/yangguosb/article/details/79762565
- * 
+/**
+ * Central template class for DingTalk API operations. Provides access to account, SNS, SSO,
+ * JSAPI, robot, and user operations, as well as access token management and signature computation.
+ *
  * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ * @see <a href="https://open-doc.dingtalk.com/microapp/serverapi2/eev437">Access Token Documentation</a>
  */
 @Slf4j
 public class DingTalkTemplate implements InitializingBean {
@@ -60,63 +62,66 @@ public class DingTalkTemplate implements InitializingBean {
 	}
 
 	/**
-	 * 通过应用Key或Id获取corpId
-	 * @param appKey 应用Key或Id
-	 * @return 企业corpId
+	 * Retrieves the enterprise corpId for the given application key.
+	 *
+	 * @param appKey the application key or ID
+	 * @return the enterprise corpId
 	 */
 	public String getCorpId(String appKey){
 		return dingTalkConfigProvider.getCorpId(appKey);
 	}
 
 	/**
-	 * 企业的密钥
-	 * @param corpId  企业ID
-	 * @return 企业的密钥
+	 * Retrieves the enterprise secret for the given corpId.
+	 *
+	 * @param corpId the enterprise ID
+	 * @return the enterprise secret
 	 */
 	public String getCorpSecret(String corpId){
 		return dingTalkConfigProvider.getCorpSecret(corpId);
 	}
 
 	/**
-	 * 应用密钥
-	 * @param corpId  企业ID
-	 * @param appKey 应用Key或Id
-	 * @return 应用密钥
+	 * Retrieves the application secret for the given enterprise and application key.
+	 *
+	 * @param corpId the enterprise ID
+	 * @param appKey the application key or ID
+	 * @return the application secret
 	 */
 	public String getAppSecret(String corpId, String appKey) {
 		return dingTalkConfigProvider.getAppSecret(corpId, appKey);
 	}
 
 	/**
-	 * 企业内部开发获取access_token 先从缓存查，再到钉钉查
-	 * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
-	 * @param corpId  企业ID
-	 * @param appKey   企业应用Key
-	 * @return the AccessToken
-	 * @throws ApiException if get AccessToken Exception
+	 * Retrieves the enterprise internal application access token.
+	 *
+	 * @param corpId  the enterprise ID
+	 * @param appKey  the application key
+	 * @return the access token
+	 * @throws ApiException if the API request fails
 	 */
 	public String getAccessToken(String corpId, String appKey) throws ApiException {
 		return dingTalkAccessTokenProvider.getAccessToken(corpId, appKey);
 	}
 	
 	/**
-	 * 获取钉钉开放应用的ACCESS_TOKEN
-	 * @param corpId  企业ID
-	 * @param appId   企业应用Id
-	 * @return the AccessToken
-	 * @throws ApiException if get AccessToken Exception
+	 * Retrieves the SNS access token for a DingTalk open application.
+	 *
+	 * @param corpId the enterprise ID
+	 * @param appId  the application ID
+	 * @return the SNS access token
+	 * @throws ApiException if the API request fails
 	 */
 	public String getSnsAccessToken(String corpId, String appId) throws ApiException {
 		return dingTalkAccessTokenProvider.getSnsAccessToken(corpId, appId);
 	}
 	
 	/**
-     * 计算签名
-     * 参考：https://ding-doc.dingtalk.com/doc#/serverapi2/qf2nxq/9e91d73c
+     * Computes the HMAC-SHA256 signature for DingTalk robot message verification.
      *
-     * @param secret    密钥，机器人安全设置页面，加签一栏下面显示的SEC开头的字符
-     * @param timestamp 当前时间戳，毫秒级单位
-     * @return 根据时间戳计算后的签名信息
+     * @param secret    the robot secret token (SEC开头的字符)
+     * @param timestamp the current timestamp in milliseconds
+     * @return the URL-encoded signature string
      */
 	public String getSign(String secret, Long timestamp) {
         try {

@@ -18,14 +18,15 @@ package com.dingtalk.spring.boot.bean;
 import java.io.Serializable;
 
 /**
- * 请求消息的抽象类
+ * Abstract base class for all DingTalk message types.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @SuppressWarnings("serial")
 public abstract class BaseMessage implements Serializable {
 
-    /**
-     * 消息类型
-     */
+    /** The message type. */
     protected MessageType msgtype;
 
 	public BaseMessage(MessageType msgtype) {

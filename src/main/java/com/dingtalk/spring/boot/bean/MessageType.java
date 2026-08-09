@@ -16,32 +16,21 @@
 package com.dingtalk.spring.boot.bean;
 
 /**
- * 定义消息类型，目前有文本、链接、MarkDown、跳转卡片、消息卡片五种枚举值
+ * Enumeration of DingTalk message types: text, link, markdown, action card, and feed card.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public enum MessageType {
 
-    /**
-     * 文本类型
-     */
+    /** Plain text message. */
     text,
-
-    /**
-     * 链接类型
-     */
+    /** Link message with title, text, and URL. */
     link,
-
-    /**
-     * MarkDown类型
-     */
+    /** Markdown formatted message. */
     markdown,
-
-    /**
-     * 跳转卡片类型
-     */
+    /** Action card message with interactive buttons. */
     actionCard,
-
-    /**
-     * 消息卡片类型
-     */
+    /** Feed card message with multiple link items. */
     feedCard;
 }

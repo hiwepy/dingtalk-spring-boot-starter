@@ -16,6 +16,11 @@
 package com.dingtalk.spring.boot;
 
 /**
+ * Abstract base class for DingTalk API operations. Provides common constants such as the
+ * DingTalk Open API base URL, HTTP method, content types, and delimiters.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public abstract class DingTalkOperations {
 

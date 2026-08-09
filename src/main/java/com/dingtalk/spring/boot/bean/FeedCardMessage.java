@@ -22,7 +22,11 @@ import java.util.List;
 import org.springframework.util.StringUtils;
 
 /**
- * 消息卡片类型Message
+ * Represents a DingTalk feed card message containing multiple feed card items.
+ * Supports up to 10 feed card items.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @SuppressWarnings("serial")
 public class FeedCardMessage extends BaseMessage {

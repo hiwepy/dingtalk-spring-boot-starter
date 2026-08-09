@@ -16,30 +16,21 @@
 package com.dingtalk.spring.boot.bean;
 
 /**
- * 文本请求消息
+ * Represents a DingTalk markdown message with title, body text, and at-mention support.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @SuppressWarnings("serial")
 public class MarkdownMessage extends BaseMessage {
 
-	/**
-     * 消息简介
-     */
+	/** The markdown body text. */
     private String text;
-
-    /**
-     * 消息标题
-     */
+    /** The message title. */
     private String title;
-
-    /**
-     * 可以通过群成员的绑定手机号来艾特具体的群成员
-     */
+    /** Mobile phone numbers of group members to @mention. */
     private String[] atMobiles;
-
-    /**
-     * 是否艾特所有人
-     * 也可以设置isAtAll=true来艾特所有人
-     */
+    /** Whether to @mention all group members. */
     private boolean isAtAll;
 
 	public MarkdownMessage() {

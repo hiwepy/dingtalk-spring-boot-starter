@@ -16,29 +16,21 @@
 package com.dingtalk.spring.boot.bean;
 
 /**
- * 链接消息类型
+ * Represents a DingTalk link message with title, text, image, and target URL.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @SuppressWarnings("serial")
 public class LinkMessage extends BaseMessage {
 
-    /**
-     * 消息简介
-     */
+    /** The message body text. */
     private String text;
-
-    /**
-     * 消息标题
-     */
+    /** The message title. */
     private String title;
-
-    /**
-     * 封面图片URL
-     */
+    /** The cover image URL. */
     private String picUrl;
-
-    /**
-     * 消息跳转URL
-     */
+    /** The URL to navigate to when the message is clicked. */
     private String messageUrl;
 
     public LinkMessage() {

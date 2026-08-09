@@ -17,17 +17,16 @@ package com.dingtalk.spring.boot.bean;
 
 
 /**
- * ActionCard消息按钮布局枚举值
+ * Enumeration of button layout orientations for DingTalk action card messages.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public enum ButtonOrientationType {
-    /**
-     * 水平布局
-     */
-    HORIZONTAL("水平布局", "1"),
-    /**
-     * 垂直布局
-     */
-    VERTICAL("垂直布局", "0");
+    /** Horizontal button layout. */
+    HORIZONTAL("Horizontal", "1"),
+    /** Vertical button layout. */
+    VERTICAL("Vertical", "0");
 
     private String comment;
 

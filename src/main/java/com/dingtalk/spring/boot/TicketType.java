@@ -18,17 +18,16 @@ package com.dingtalk.spring.boot;
 import lombok.Getter;
 
 /**
- * ticket类型枚举
+ * Enumeration of DingTalk ticket types used for JSAPI and other API integrations.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @Getter
 public enum TicketType {
-  /**
-   * jsapi
-   */
+  /** JSAPI ticket type. */
   JSAPI("jsapi");
-  /**
-   * type代码
-   */
+  /** The ticket type code. */
   private String code;
 
   TicketType(String code) {

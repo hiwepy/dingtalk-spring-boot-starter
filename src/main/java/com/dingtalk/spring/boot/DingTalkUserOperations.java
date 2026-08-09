@@ -8,19 +8,14 @@ import com.taobao.api.ApiException;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * <ul>
- * <li>
- * 1、企业内部应用免登：
- * https://open.dingtalk.com/document/orgapp-server/enterprise-internal-application-logon-free
- * </li>
- * <li>
- * 2、第三方企业应用免登：
- * https://open.dingtalk.com/document/orgapp-server/third-party-enterprise-application-logon-free
- * </li>
- * <li>
- * 3、应用管理后台免登：
- * https://open.dingtalk.com/document/orgapp-server/log-on-site-application-management-backend
- * </ul>
+ * Operations for DingTalk user management, supporting free-login for enterprise internal applications,
+ * third-party enterprise applications, and the application management backend.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ * @see <a href="https://open.dingtalk.com/document/orgapp-server/enterprise-internal-application-logon-free">Enterprise Internal Application Free Login</a>
+ * @see <a href="https://open.dingtalk.com/document/orgapp-server/third-party-enterprise-application-logon-free">Third-Party Enterprise Application Free Login</a>
+ * @see <a href="https://open.dingtalk.com/document/orgapp-server/log-on-site-application-management-backend">Application Management Backend Free Login</a>
  */
 @Slf4j
 public class DingTalkUserOperations extends DingTalkOperations {
@@ -30,10 +25,12 @@ public class DingTalkUserOperations extends DingTalkOperations {
 	}
 
 	/**
-	 * @param code 	code
-	 * @param accessToken 	应用的accessToken
-	 * @return the OapiUserGetuserinfoResponse
-	 * @throws ApiException if Api request Exception
+	 * Retrieves user information by the free-login authorization code.
+	 *
+	 * @param code          the free-login authorization code
+	 * @param accessToken   the application access token
+	 * @return the user information response
+	 * @throws ApiException if the API request fails
 	 */
 	public OapiUserGetuserinfoResponse getUserinfoByCode(String code, String accessToken) throws ApiException {
 		DingTalkClient client = new DefaultDingTalkClient(PREFIX + "user/getuserinfo");

@@ -2,6 +2,13 @@ package com.dingtalk.spring.boot;
 
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Provider interface for mapping between DingTalk user IDs and internal application user IDs.
+ * Implementations can customize the user ID resolution logic for different DingTalk application types.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public interface DingTalkUserIdProvider {
 
     default String getUserIdByDingTalkUser(String corpId, String appId, String account)  {

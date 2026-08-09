@@ -16,18 +16,16 @@
 package com.dingtalk.spring.boot.bean;
 
 /**
- * 跳转卡片中的按钮实体类
+ * Represents a button in a DingTalk action card message.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 public class ActionCardButton {
 
-    /**
-     * 按钮标题
-     */
+    /** The button title displayed to the user. */
     private String title;
-
-    /**
-     * 实际点击时调用的URL
-     */
+    /** The URL to navigate to when the button is clicked. */
     private String actionURL;
 
     public ActionCardButton() {

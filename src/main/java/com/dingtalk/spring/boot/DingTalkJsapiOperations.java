@@ -24,6 +24,12 @@ import com.dingtalk.spring.boot.utils.RandomUtils;
 import com.taobao.api.ApiException;
 
 /**
+ * Operations for DingTalk JSAPI integration, including obtaining JSAPI tickets
+ * and creating signatures for front-end JSAPI calls.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ * @see <a href="https://ding-doc.dingtalk.com/doc#/dev/uwa7vs">JSAPI Signature Documentation</a>
  */
 public class DingTalkJsapiOperations extends DingTalkOperations {
 
@@ -33,10 +39,13 @@ public class DingTalkJsapiOperations extends DingTalkOperations {
 		super(template);
 	}
 
-	/*
-	 * 获得ticket,不强制刷新ticket.
+	/**
+	 * Retrieves a JSAPI ticket of the given type without forcing a refresh.
 	 *
-	 * @see #getTicket(TicketType, boolean)
+	 * @param type        the ticket type
+	 * @param accessToken the API access token
+	 * @return the JSAPI ticket response
+	 * @throws ApiException if the API request fails
 	 */
 	public OapiGetJsapiTicketResponse getTicket(TicketType type, String accessToken) throws ApiException {
 		OapiGetJsapiTicketRequest req = new OapiGetJsapiTicketRequest();
@@ -44,8 +53,14 @@ public class DingTalkJsapiOperations extends DingTalkOperations {
 		return client.execute(req, accessToken);
 	}
 
-	/*
-	 * 创建调用jsapi时所需要的签名. 详情请见：https://ding-doc.dingtalk.com/doc#/dev/uwa7vs
+	/**
+	 * Creates a JSAPI ticket signature required for front-end JSAPI calls.
+	 *
+	 * @param url         the current page URL to sign
+	 * @param agentId     the application agent ID
+	 * @param accessToken the API access token
+	 * @return the JSAPI ticket signature
+	 * @throws ApiException if the API request fails
 	 */
 	public JsapiTicketSignature createSignature(String url, String agentId, String accessToken)
 			throws ApiException {

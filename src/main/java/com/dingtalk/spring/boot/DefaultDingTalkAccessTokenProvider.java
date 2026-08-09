@@ -9,6 +9,13 @@ import com.dingtalk.api.response.OapiSnsGettokenResponse;
 import com.taobao.api.ApiException;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * Default implementation of {@link DingTalkAccessTokenProvider} that retrieves access tokens
+ * from the DingTalk Open API using the configured app key and secret.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
+ */
 public class DefaultDingTalkAccessTokenProvider implements DingTalkAccessTokenProvider {
 
     private final String DINGTALK_SERVICE = "https://oapi.dingtalk.com";
@@ -19,6 +26,14 @@ public class DefaultDingTalkAccessTokenProvider implements DingTalkAccessTokenPr
         this.dingTalkConfigProvider = dingTalkConfigProvider;
     }
 
+    /**
+     * Retrieves the enterprise internal application access token by app key and secret.
+     *
+     * @param corpId the enterprise ID
+     * @param appKey the application key
+     * @return the access token, or null if the request fails
+     * @throws ApiException if the API request fails
+     */
     @Override
     public String getAccessToken(String corpId, String appKey) throws ApiException {
 
@@ -39,6 +54,14 @@ public class DefaultDingTalkAccessTokenProvider implements DingTalkAccessTokenPr
         return null;
     }
 
+    /**
+     * Retrieves the SNS (social) access token for a DingTalk open application.
+     *
+     * @param corpId the enterprise ID
+     * @param appId the application ID
+     * @return the SNS access token, or an empty string if the request fails
+     * @throws ApiException if the API request fails
+     */
     @Override
     public String getSnsAccessToken(String corpId, String appId) throws ApiException {
 

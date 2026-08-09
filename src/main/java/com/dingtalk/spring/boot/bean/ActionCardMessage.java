@@ -19,7 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 跳转卡片类型
+ * Represents a DingTalk action card message with configurable buttons, avatar visibility,
+ * and button orientation. Supports up to 5 action card buttons.
+ *
+ * @author [@Loong Wan](https://github.com/loong10k)
+ * @since 1.0.0
  */
 @SuppressWarnings("serial")
 public class ActionCardMessage extends BaseMessage {
@@ -105,9 +109,10 @@ public class ActionCardMessage extends BaseMessage {
     }
  
     /**
-     * 增加操作按钮
+     * Adds an action card button to this message.
      *
-     * @param button
+     * @param button the button to add
+     * @throws IllegalArgumentException if the button is null or the maximum count is exceeded
      */
     public void addButton(ActionCardButton button) {
         if (button == null) {
