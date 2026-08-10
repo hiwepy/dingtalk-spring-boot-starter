@@ -25,7 +25,7 @@ import com.taobao.api.ApiException;
 /**
  * https://ding-doc.dingtalk.com/doc#/dev/uwa7vs
  * 
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 public class DingTalkUtils {
 
