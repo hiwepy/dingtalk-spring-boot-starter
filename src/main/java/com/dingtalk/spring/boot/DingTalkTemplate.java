@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
  * https://open-doc.dingtalk.com/microapp/serverapi2/eev437
  * https://blog.csdn.net/yangguosb/article/details/79762565
  * 
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 @Slf4j
 public class DingTalkTemplate implements InitializingBean {
