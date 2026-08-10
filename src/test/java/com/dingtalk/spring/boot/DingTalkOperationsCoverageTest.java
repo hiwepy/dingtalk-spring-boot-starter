@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 /**
  * Additional tests to improve coverage of operations classes that make HTTP calls.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  */
 class DingTalkOperationsCoverageTest {
 

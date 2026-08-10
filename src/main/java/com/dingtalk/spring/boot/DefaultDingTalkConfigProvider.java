@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Default implementation of {@link DingTalkConfigProvider} that loads DingTalk configuration
  * from {@link DingTalkProperties} and builds an in-memory lookup map of app keys to secrets.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, InitializingBean {

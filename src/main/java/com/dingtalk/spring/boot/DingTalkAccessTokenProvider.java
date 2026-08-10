@@ -6,7 +6,7 @@ import com.taobao.api.ApiException;
  * Provider interface for obtaining DingTalk access tokens for enterprise internal applications
  * and open (SNS) applications.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public interface DingTalkAccessTokenProvider {

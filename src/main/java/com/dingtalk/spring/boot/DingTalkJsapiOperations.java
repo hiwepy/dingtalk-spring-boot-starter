@@ -27,7 +27,7 @@ import com.taobao.api.ApiException;
  * Operations for DingTalk JSAPI integration, including obtaining JSAPI tickets
  * and creating signatures for front-end JSAPI calls.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  * @see <a href="https://ding-doc.dingtalk.com/doc#/dev/uwa7vs">JSAPI Signature Documentation</a>
  */

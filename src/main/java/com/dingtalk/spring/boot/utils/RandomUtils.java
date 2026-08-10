@@ -19,7 +19,7 @@ package com.dingtalk.spring.boot.utils;
 /**
  * Utility class for generating random strings used in DingTalk signature computation.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class RandomUtils {

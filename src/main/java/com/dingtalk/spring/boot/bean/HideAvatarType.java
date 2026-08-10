@@ -18,7 +18,7 @@ package com.dingtalk.spring.boot.bean;
 /**
  * Enumeration of avatar visibility options for DingTalk action card messages.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public enum HideAvatarType {

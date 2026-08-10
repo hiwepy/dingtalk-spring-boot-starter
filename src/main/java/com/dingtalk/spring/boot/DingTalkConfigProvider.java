@@ -6,7 +6,7 @@ import com.dingtalk.spring.boot.property.*;
  * Provider interface for accessing DingTalk configuration properties for various application types
  * including enterprise internal apps, personal mini apps, suites, login apps, and robots.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public interface DingTalkConfigProvider {

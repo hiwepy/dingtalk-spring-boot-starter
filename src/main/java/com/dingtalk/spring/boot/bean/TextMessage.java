@@ -18,7 +18,7 @@ package com.dingtalk.spring.boot.bean;
 /**
  * Represents a DingTalk plain text message with at-mention support.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @SuppressWarnings("serial")

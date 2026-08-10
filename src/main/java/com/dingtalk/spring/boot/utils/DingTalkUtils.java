@@ -25,7 +25,7 @@ import com.taobao.api.ApiException;
 /**
  * Utility class for DingTalk JSAPI signature computation using SHA-1 hashing.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  * @see <a href="https://ding-doc.dingtalk.com/doc#/dev/uwa7vs">JSAPI Signature Documentation</a>
  */

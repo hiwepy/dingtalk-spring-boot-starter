@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
  * Operations for DingTalk user management, supporting free-login for enterprise internal applications,
  * third-party enterprise applications, and the application management backend.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  * @see <a href="https://open.dingtalk.com/document/orgapp-server/enterprise-internal-application-logon-free">Enterprise Internal Application Free Login</a>
  * @see <a href="https://open.dingtalk.com/document/orgapp-server/third-party-enterprise-application-logon-free">Third-Party Enterprise Application Free Login</a>

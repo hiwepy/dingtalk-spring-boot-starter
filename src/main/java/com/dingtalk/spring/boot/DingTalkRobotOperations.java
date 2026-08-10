@@ -41,7 +41,7 @@ import org.apache.commons.lang3.ArrayUtils;
  * Operations for sending messages via DingTalk robots, supporting text, link, markdown,
  * action card, and feed card message types.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class DingTalkRobotOperations extends DingTalkOperations {

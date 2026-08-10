@@ -18,7 +18,7 @@ package com.dingtalk.spring.boot.bean;
 /**
  * Enumeration of DingTalk message types: text, link, markdown, action card, and feed card.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public enum MessageType {

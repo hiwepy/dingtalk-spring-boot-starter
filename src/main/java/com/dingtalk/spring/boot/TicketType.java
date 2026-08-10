@@ -20,7 +20,7 @@ import lombok.Getter;
 /**
  * Enumeration of DingTalk ticket types used for JSAPI and other API integrations.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @Getter

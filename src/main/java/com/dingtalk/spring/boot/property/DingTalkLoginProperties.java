@@ -7,7 +7,7 @@ import lombok.ToString;
 /**
  * Configuration properties for DingTalk mobile access application scan-to-login.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @Getter

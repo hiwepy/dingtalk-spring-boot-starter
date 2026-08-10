@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
  * Central template class for DingTalk API operations. Provides access to account, SNS, SSO,
  * JSAPI, robot, and user operations, as well as access token management and signature computation.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  * @see <a href="https://open-doc.dingtalk.com/microapp/serverapi2/eev437">Access Token Documentation</a>
  */

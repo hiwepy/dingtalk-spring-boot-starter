@@ -22,7 +22,7 @@ import java.util.List;
  * Represents a DingTalk action card message with configurable buttons, avatar visibility,
  * and button orientation. Supports up to 5 action card buttons.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @SuppressWarnings("serial")

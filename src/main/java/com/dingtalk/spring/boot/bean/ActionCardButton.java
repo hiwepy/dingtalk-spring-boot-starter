@@ -18,7 +18,7 @@ package com.dingtalk.spring.boot.bean;
 /**
  * Represents a button in a DingTalk action card message.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class ActionCardButton {

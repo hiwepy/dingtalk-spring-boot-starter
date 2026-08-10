@@ -18,7 +18,7 @@ package com.dingtalk.spring.boot.bean;
 /**
  * Represents a DingTalk link message with title, text, image, and target URL.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 @SuppressWarnings("serial")

@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
  * Operations for DingTalk SNS (social) login, including scan-to-login third-party websites,
  * free-login within DingTalk, and password-based login for third-party websites.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  * @see <a href="https://ding-doc.dingtalk.com/doc#/serverapi2/kymkv6">Scan-to-Login Third-Party Website</a>
  * @see <a href="https://ding-doc.dingtalk.com/doc#/serverapi2/etaarr">Free-Login Third-Party Website in DingTalk</a>

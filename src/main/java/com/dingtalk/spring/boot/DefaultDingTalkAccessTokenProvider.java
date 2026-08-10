@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
  * Default implementation of {@link DingTalkAccessTokenProvider} that retrieves access tokens
  * from the DingTalk Open API using the configured app key and secret.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  */
 public class DefaultDingTalkAccessTokenProvider implements DingTalkAccessTokenProvider {

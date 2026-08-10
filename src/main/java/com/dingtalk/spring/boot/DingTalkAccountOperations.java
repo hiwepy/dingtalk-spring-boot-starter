@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
  * Operations for DingTalk enterprise internal application login (free login) and user management.
  * Provides methods to retrieve user information by authorization code, union ID, or user ID.
  *
- * @author [@Loong Wan](https://github.com/loong10k)
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
  * @since 1.0.0
  * @see <a href="https://ding-doc.dingtalk.com/doc#/serverapi2/clotub">Enterprise Internal Application Free Login</a>
  * @see <a href="https://ding-doc.dingtalk.com/doc#/serverapi2/ege851">User Management</a>
