@@ -29,6 +29,11 @@ import org.springframework.util.StringUtils;
  * @since 1.0.0
  */
 @SuppressWarnings("serial")
+/**
+ * <p>Auto-configuration for FeedCardMessage.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class FeedCardMessage extends BaseMessage {
 
     private static final int MAX_BUTTON_COUNT = 10;
@@ -54,10 +59,15 @@ public class FeedCardMessage extends BaseMessage {
         this.feedCardItems = feedCardItems;
     }
 
+    /** @return return the feed card items. */
     public List<FeedCardMessageItem> getFeedCardItems() {
         return feedCardItems;
     }
 
+    /**
+     * <p>Add feed card item.</p>
+     * @param item
+     */
     public void addFeedCardItem(FeedCardMessageItem item) {
         if (item == null || StringUtils.isEmpty(item.getMessageURL()) ||
                 StringUtils.isEmpty(item.getPicURL()) || StringUtils.isEmpty(item.getTitle())) {

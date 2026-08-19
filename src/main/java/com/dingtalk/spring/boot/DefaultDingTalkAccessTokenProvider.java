@@ -35,6 +35,7 @@ public class DefaultDingTalkAccessTokenProvider implements DingTalkAccessTokenPr
      * @throws ApiException if the API request fails
      */
     @Override
+    /** @return return the access token. */
     public String getAccessToken(String corpId, String appKey) throws ApiException {
 
         OapiGettokenRequest request = new OapiGettokenRequest();
@@ -63,6 +64,7 @@ public class DefaultDingTalkAccessTokenProvider implements DingTalkAccessTokenPr
      * @throws ApiException if the API request fails
      */
     @Override
+    /** @return return the sns access token. */
     public String getSnsAccessToken(String corpId, String appId) throws ApiException {
 
         String appSecret = dingTalkConfigProvider.getAppSecret(corpId, appId);

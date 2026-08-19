@@ -36,6 +36,11 @@ public class ActionCardButton {
         this.actionURL = actionURL;
     }
 
+    /**
+     * <p>Default read button.</p>
+     * @param actionURL
+     * @return the result
+     */
     public static ActionCardButton defaultReadButton(String actionURL) {
         ActionCardButton button = new ActionCardButton();
         button.setTitle("阅读全文");
@@ -43,18 +48,22 @@ public class ActionCardButton {
         return button;
     }
 
+    /** @return return the title. */
     public String getTitle() {
         return title;
     }
 
+    /** @param title set the title. */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /** @return return the action u r l. */
     public String getActionURL() {
         return actionURL;
     }
 
+    /** @param actionURL set the action u r l. */
     public void setActionURL(String actionURL) {
         this.actionURL = actionURL;
     }

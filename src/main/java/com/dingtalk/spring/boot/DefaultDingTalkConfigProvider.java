@@ -26,6 +26,9 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
+    /**
+     * <p>After properties set.</p>
+     */
     public void afterPropertiesSet() throws Exception {
 
         if(!CollectionUtils.isEmpty(this.dingTalkProperties.getCorpApps())) {
@@ -52,11 +55,13 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
+    /** @return return the ding talk properties. */
     public DingTalkProperties getDingTalkProperties(String corpId) {
         return dingTalkProperties;
     }
 
     @Override
+    /** @return return the ding talk corp app properties. */
     public DingTalkCorpAppProperties getDingTalkCorpAppProperties(String corpId, String agentId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getCorpApps())){
             return null;
@@ -67,6 +72,7 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
+    /** @return return the ding talk personal mini app properties. */
     public DingTalkPersonalMiniAppProperties getDingTalkPersonalMiniAppProperties(String corpId, String appId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getApps())){
             return null;
@@ -77,6 +83,7 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
+    /** @return return the ding talk suite properties. */
     public DingTalkSuiteProperties getDingTalkSuiteProperties(String corpId, String suiteId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getSuites())){
             return null;
@@ -87,6 +94,7 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
+    /** @return return the ding talk login properties. */
     public DingTalkLoginProperties getDingTalkLoginProperties(String corpId, String appId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getLogins())){
             return null;
@@ -97,6 +105,7 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
+    /** @return return the ding talk robot properties. */
     public DingTalkRobotProperties getDingTalkRobotProperties(String corpId, String robotId) {
         if(CollectionUtils.isEmpty(dingTalkProperties.getRobots())){
             return null;
@@ -107,21 +116,29 @@ public class DefaultDingTalkConfigProvider implements DingTalkConfigProvider, In
     }
 
     @Override
+    /**
+     * <p>Has app key.</p>
+     * @param appKey
+     * @return the result
+     */
     public boolean hasAppKey(String appKey) {
         return appKeySecret.containsKey(appKey);
     }
 
     @Override
+    /** @return return the corp id. */
     public String getCorpId(String appKey) {
         return dingTalkProperties.getCorpId();
     }
 
     @Override
+    /** @return return the corp secret. */
     public String getCorpSecret(String corpId) {
         return dingTalkProperties.getCorpSecret();
     }
 
     @Override
+    /** @return return the app secret. */
     public String getAppSecret(String corpId, String appKey) {
         String appSecret = appKeySecret.get(appKey);
         return appSecret;

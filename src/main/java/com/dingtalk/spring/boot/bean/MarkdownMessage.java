@@ -22,6 +22,11 @@ package com.dingtalk.spring.boot.bean;
  * @since 1.0.0
  */
 @SuppressWarnings("serial")
+/**
+ * <p>Auto-configuration for MarkdownMessage.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class MarkdownMessage extends BaseMessage {
 
 	/** The markdown body text. */
@@ -57,34 +62,42 @@ public class MarkdownMessage extends BaseMessage {
 		this.isAtAll = isAtAll;
 	}
 
+	/** @return return the title. */
 	public String getTitle() {
 		return title;
 	}
 
+	/** @param title set the title. */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/** @return return the text. */
 	public String getText() {
 		return text;
 	}
 
+	/** @param text set the text. */
 	public void setText(String text) {
 		this.text = text;
 	}
 
+	/** @return return the at mobiles. */
 	public String[] getAtMobiles() {
 		return atMobiles;
 	}
 
+	/** @param atMobiles set the at mobiles. */
 	public void setAtMobiles(String[] atMobiles) {
 		this.atMobiles = atMobiles;
 	}
 
+	/** @return return the is at all. */
 	public boolean getIsAtAll() {
 		return isAtAll;
 	}
 
+	/** @param isAtAll set the is at all. */
 	public void setIsAtAll(boolean isAtAll) {
 		this.isAtAll = isAtAll;
 	}

@@ -37,10 +37,12 @@ public enum ButtonOrientationType {
         this.value = value;
     }
 
+    /** @return return the comment. */
     public String getComment() {
         return comment;
     }
 
+    /** @return return the value. */
     public String getValue() {
         return value;
     }

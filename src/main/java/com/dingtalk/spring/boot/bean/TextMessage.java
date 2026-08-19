@@ -22,6 +22,11 @@ package com.dingtalk.spring.boot.bean;
  * @since 1.0.0
  */
 @SuppressWarnings("serial")
+/**
+ * <p>Auto-configuration for TextMessage.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class TextMessage extends BaseMessage {
 
 	/** The text message content. */
@@ -52,26 +57,32 @@ public class TextMessage extends BaseMessage {
 		this.atAll = atAll;
 	}
 
+	/** @return return the content. */
 	public String getContent() {
 		return content;
 	}
 
+	/** @param content set the content. */
 	public void setContent(String content) {
 		this.content = content;
 	}
 
+	/** @return return the at mobiles. */
 	public String[] getAtMobiles() {
 		return atMobiles;
 	}
 
+	/** @param atMobiles set the at mobiles. */
 	public void setAtMobiles(String[] atMobiles) {
 		this.atMobiles = atMobiles;
 	}
 
+	/** @return return whether at all is enabled. */
 	public boolean isAtAll() {
 		return atAll;
 	}
 
+	/** @param atAll set the at all. */
 	public void setAtAll(boolean atAll) {
 		this.atAll = atAll;
 	}

@@ -24,6 +24,11 @@ import lombok.Getter;
  * @since 1.0.0
  */
 @Getter
+/**
+ * <p>Auto-configuration for TicketType.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public enum TicketType {
   /** JSAPI ticket type. */
   JSAPI("jsapi");

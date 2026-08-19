@@ -13,6 +13,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+/**
+ * <p>Auto-configuration for DingTalkCorpAppProperties.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkCorpAppProperties {
 
 	/** The application agent ID. */

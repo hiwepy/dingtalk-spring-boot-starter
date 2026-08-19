@@ -24,6 +24,11 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @SuppressWarnings("serial")
+/**
+ * <p>Auto-configuration for BaseMessage.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public abstract class BaseMessage implements Serializable {
 
     /** The message type. */
@@ -34,10 +39,12 @@ public abstract class BaseMessage implements Serializable {
 		this.msgtype = msgtype;
 	}
 
+	/** @return return the msgtype. */
 	public MessageType getMsgtype() {
 		return msgtype;
 	}
 
+	/** @param msgtype set the msgtype. */
 	public void setMsgtype(MessageType msgtype) {
 		this.msgtype = msgtype;
 	}

@@ -26,6 +26,11 @@ import java.util.List;
  * @since 1.0.0
  */
 @SuppressWarnings("serial")
+/**
+ * <p>Auto-configuration for ActionCardMessage.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class ActionCardMessage extends BaseMessage {
 
     /**
@@ -124,46 +129,57 @@ public class ActionCardMessage extends BaseMessage {
         buttons.add(button);
     }
 
+    /** @return return the title. */
     public String getTitle() {
         return title;
     }
 
+    /** @param title set the title. */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /** @return return the text. */
     public String getText() {
         return text;
     }
 
+    /** @param text set the text. */
     public void setText(String text) {
         this.text = text;
     }
 
+    /** @return return the hide avatar. */
     public HideAvatarType getHideAvatar() {
         return hideAvatar;
     }
 
+    /** @param hideAvatar set the hide avatar. */
     public void setHideAvatar(HideAvatarType hideAvatar) {
         this.hideAvatar = hideAvatar;
     }
 
+    /** @return return the btn orientation. */
     public ButtonOrientationType getBtnOrientation() {
         return btnOrientation;
     }
 
+    /** @param btnOrientation set the btn orientation. */
     public void setBtnOrientation(ButtonOrientationType btnOrientation) {
         this.btnOrientation = btnOrientation;
     }
 
+    /** @return return the buttons. */
     public List<ActionCardButton> getButtons() {
         return buttons;
     }
 
+    /** @return return whether button view is enabled. */
     public boolean isButtonView() {
         return isButtonView;
     }
 
+    /** @param buttonView set the button view. */
     public void setButtonView(boolean buttonView) {
         isButtonView = buttonView;
     }

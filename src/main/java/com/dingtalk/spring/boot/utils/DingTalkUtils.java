@@ -57,6 +57,11 @@ public class DingTalkUtils {
 	}
 
 	// 字节数组转化成十六进制字符串
+	/**
+	 * <p>Byte to hex.</p>
+	 * @param hash
+	 * @return the result
+	 */
 	private static String byteToHex(final byte[] hash) {
 		Formatter formatter = new Formatter();
 		for (byte b : hash) {

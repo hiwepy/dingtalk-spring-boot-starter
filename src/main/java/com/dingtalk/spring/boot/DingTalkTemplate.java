@@ -35,6 +35,11 @@ import lombok.extern.slf4j.Slf4j;
  * @see <a href="https://open-doc.dingtalk.com/microapp/serverapi2/eev437">Access Token Documentation</a>
  */
 @Slf4j
+/**
+ * <p>Auto-configuration for DingTalkTemplate.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkTemplate implements InitializingBean {
 
 	private final DingTalkConfigProvider dingTalkConfigProvider;
@@ -53,10 +58,18 @@ public class DingTalkTemplate implements InitializingBean {
 	}
 
 	@Override
+	/**
+	 * <p>After properties set.</p>
+	 */
 	public void afterPropertiesSet() throws Exception {
 
 	}
 
+	/**
+	 * <p>Has app key.</p>
+	 * @param appKey
+	 * @return the result
+	 */
 	public boolean hasAppKey(String appKey) {
 		return dingTalkConfigProvider.hasAppKey(appKey);
 	}
@@ -138,34 +151,60 @@ public class DingTalkTemplate implements InitializingBean {
         }
     }
 
+	/**
+	 * <p>Ops for account.</p>
+	 * @return the result
+	 */
 	public DingTalkAccountOperations opsForAccount() {
 		return accountOps;
 	}
 
+	/**
+	 * <p>Ops for sns.</p>
+	 * @return the result
+	 */
 	public DingTalkSnsOperations opsForSns() {
 		return snsOps;
 	}
 	
+	/**
+	 * <p>Ops for sso.</p>
+	 * @return the result
+	 */
 	public DingTalkSsoOperations opsForSso() {
 		return ssoOps;
 	}
 	
+	/**
+	 * <p>Ops for jsapi.</p>
+	 * @return the result
+	 */
 	public DingTalkJsapiOperations opsForJsapi() {
 		return jsapiOps;
 	}
 	
+	/**
+	 * <p>Ops for robot.</p>
+	 * @return the result
+	 */
 	public DingTalkRobotOperations opsForRobot() {
 		return robotOps;
 	}
 
+	/**
+	 * <p>Ops for user.</p>
+	 * @return the result
+	 */
 	public DingTalkUserOperations opsForUser() {
 		return userOps;
 	}
 
+	/** @return return the ding talk access token provider. */
 	public DingTalkAccessTokenProvider getDingTalkAccessTokenProvider() {
 		return dingTalkAccessTokenProvider;
 	}
 
+	/** @return return the ding talk config provider. */
 	public DingTalkConfigProvider getDingTalkConfigProvider() {
 		return dingTalkConfigProvider;
 	}

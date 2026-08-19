@@ -33,6 +33,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * <p>Auto-configuration for JsapiTicketSignature.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class JsapiTicketSignature implements Serializable {
 
 	private static final long serialVersionUID = 7442708886169868689L;

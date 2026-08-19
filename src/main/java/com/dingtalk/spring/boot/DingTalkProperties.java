@@ -24,6 +24,11 @@ import lombok.ToString;
  */
 @ConfigurationProperties(prefix = DingTalkProperties.PREFIX)
 @Data
+/**
+ * <p>Auto-configuration for DingTalkProperties.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkProperties {
 
 	public static final String PREFIX = "dingtalk";

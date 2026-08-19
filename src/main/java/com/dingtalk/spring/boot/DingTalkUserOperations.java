@@ -18,6 +18,11 @@ import lombok.extern.slf4j.Slf4j;
  * @see <a href="https://open.dingtalk.com/document/orgapp-server/log-on-site-application-management-backend">Application Management Backend Free Login</a>
  */
 @Slf4j
+/**
+ * <p>Auto-configuration for DingTalkUserOperations.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkUserOperations extends DingTalkOperations {
 
 	public DingTalkUserOperations(DingTalkTemplate template) {

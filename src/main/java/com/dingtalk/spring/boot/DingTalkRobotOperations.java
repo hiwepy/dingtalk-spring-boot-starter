@@ -50,6 +50,7 @@ public class DingTalkRobotOperations extends DingTalkOperations {
 		super(template);
 	}
 
+	/** @return return the webhook. */
 	protected String getWebhook(String corpId, String robotId, Long timestamp) {
 		DingTalkRobotProperties poperties = template.getDingTalkConfigProvider().getDingTalkRobotProperties(corpId, robotId);
         StringBuilder serverUrl = new StringBuilder(PREFIX + "/robot/send?access_token=").append(poperties.getAccessToken());
@@ -58,6 +59,7 @@ public class DingTalkRobotOperations extends DingTalkOperations {
         return serverUrl.toString();
     }
 
+    /** @return return the user mobile. */
     public String getUserMobile(String access_token, String userid,  String lang) {
         try {
             DingTalkClient client = new DefaultDingTalkClient(PREFIX + "/topapi/v2/user/get");
@@ -112,10 +114,24 @@ public class DingTalkRobotOperations extends DingTalkOperations {
 		return request;
     }
 
+    /**
+     * <p>Send message.</p>
+     * @param corpId
+     * @param robotId
+     * @param message
+     * @return the result
+     */
     public OapiRobotSendResponse sendMessage(String corpId, String robotId, BaseMessage message) throws ApiException {
 		return this.sendMessage(corpId, robotId, this.buidRequest(message));
 	}
 
+    /**
+     * <p>Send message.</p>
+     * @param corpId
+     * @param robotId
+     * @param request
+     * @return the result
+     */
     public OapiRobotSendResponse sendMessage(String corpId, String robotId, OapiRobotSendRequest request) throws ApiException {
   		Long timestamp = System.currentTimeMillis();
   		DingTalkClient client = new DefaultDingTalkClient(this.getWebhook(corpId, robotId, timestamp));
@@ -249,10 +265,24 @@ public class DingTalkRobotOperations extends DingTalkOperations {
         return this.sendMessage(corpId, robotId, new FeedCardMessage(feedCardItems));
     }
 
+    /**
+     * <p>Send message by url.</p>
+     * @param webhook
+     * @param secret
+     * @param message
+     * @return the result
+     */
     public OapiRobotSendResponse sendMessageByUrl(String webhook, String secret, BaseMessage message) throws ApiException {
 		return this.sendMessageByUrl(webhook, secret, this.buidRequest(message));
 	}
 
+    /**
+     * <p>Send message by url.</p>
+     * @param webhook
+     * @param secret
+     * @param request
+     * @return the result
+     */
     public OapiRobotSendResponse sendMessageByUrl(String webhook, String secret, OapiRobotSendRequest request) throws ApiException {
 		Long timestamp = System.currentTimeMillis();
 

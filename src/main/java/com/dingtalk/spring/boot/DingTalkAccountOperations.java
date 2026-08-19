@@ -37,6 +37,11 @@ import lombok.extern.slf4j.Slf4j;
  * @see <a href="https://ding-doc.dingtalk.com/doc#/serverapi2/ege851">User Management</a>
  */
 @Slf4j
+/**
+ * <p>Auto-configuration for DingTalkAccountOperations.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkAccountOperations extends DingTalkOperations {
 
 	public DingTalkAccountOperations(DingTalkTemplate template) {

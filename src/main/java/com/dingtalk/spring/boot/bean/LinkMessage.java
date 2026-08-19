@@ -22,6 +22,11 @@ package com.dingtalk.spring.boot.bean;
  * @since 1.0.0
  */
 @SuppressWarnings("serial")
+/**
+ * <p>Auto-configuration for LinkMessage.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class LinkMessage extends BaseMessage {
 
     /** The message body text. */
@@ -52,34 +57,42 @@ public class LinkMessage extends BaseMessage {
         this.messageUrl = messageUrl;
     }
 
+    /** @return return the text. */
     public String getText() {
         return text;
     }
 
+    /** @param text set the text. */
     public void setText(String text) {
         this.text = text;
     }
 
+    /** @return return the title. */
     public String getTitle() {
         return title;
     }
 
+    /** @param title set the title. */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /** @return return the pic url. */
     public String getPicUrl() {
         return picUrl;
     }
 
+    /** @param picUrl set the pic url. */
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
     }
 
+    /** @return return the message url. */
     public String getMessageUrl() {
         return messageUrl;
     }
 
+    /** @param messageUrl set the message url. */
     public void setMessageUrl(String messageUrl) {
         this.messageUrl = messageUrl;
     }

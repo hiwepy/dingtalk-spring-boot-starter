@@ -19,6 +19,11 @@ import com.dingtalk.api.DingTalkClient;
 @Configuration
 @ConditionalOnClass({ DingTalkClient.class })
 @EnableConfigurationProperties({ DingTalkProperties.class })
+/**
+ * <p>Auto-configuration for DingTalkAutoConfiguration.</p>
+ * @author <a href="https://github.com/loong10k">Loong Wan</a>
+ * @since 1.0.0
+ */
 public class DingTalkAutoConfiguration {
 
 	/**
@@ -29,6 +34,11 @@ public class DingTalkAutoConfiguration {
 	 */
 	@Bean
 	@ConditionalOnMissingBean
+	/**
+	 * <p>Ding talk config provider.</p>
+	 * @param dingtalkProperties
+	 * @return the result
+	 */
 	public DingTalkConfigProvider dingTalkConfigProvider(DingTalkProperties dingtalkProperties){
 		return new DefaultDingTalkConfigProvider(dingtalkProperties);
 	}
@@ -41,6 +51,11 @@ public class DingTalkAutoConfiguration {
 	 */
 	@Bean
 	@ConditionalOnMissingBean
+	/**
+	 * <p>Ding talk access token provider.</p>
+	 * @param dingTalkConfigProvider
+	 * @return the result
+	 */
 	public DingTalkAccessTokenProvider dingTalkAccessTokenProvider(ObjectProvider<DingTalkConfigProvider> dingTalkConfigProvider){
 		return new DefaultDingTalkAccessTokenProvider(dingTalkConfigProvider.getIfAvailable());
 	}

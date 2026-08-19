@@ -39,26 +39,32 @@ public class FeedCardMessageItem {
         this.picURL = picURL;
     }
 
+    /** @return return the title. */
     public String getTitle() {
         return title;
     }
 
+    /** @param title set the title. */
     public void setTitle(String title) {
         this.title = title;
     }
 
+    /** @return return the message u r l. */
     public String getMessageURL() {
         return messageURL;
     }
 
+    /** @param messageURL set the message u r l. */
     public void setMessageURL(String messageURL) {
         this.messageURL = messageURL;
     }
 
+    /** @return return the pic u r l. */
     public String getPicURL() {
         return picURL;
     }
 
+    /** @param picURL set the pic u r l. */
     public void setPicURL(String picURL) {
         this.picURL = picURL;
     }
